@@ -11,8 +11,22 @@ datasource db {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
+  id Int     @default(autoincrement()) @id
+	username String? @unique
+	password String
   email String  @unique
-  name  String?
+	bio String?
+	avatar String?
+	role Role @default(USER)
+	isTeacher Boolean @default(false)
+
+	isBanned Boolean @default(false)
+	banReason String?
+
+	@@map("users")
 }
 
+enum Role {
+	USER
+	ADMIN
+}

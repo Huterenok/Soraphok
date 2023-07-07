@@ -5,7 +5,11 @@ import { AuthModule } from "./auth/auth.module";
 import { DatabaseModule } from "./database/database.module";
 
 @Module({
-  imports: [AuthModule, DatabaseModule, ConfigModule.forRoot()],
+  imports: [
+    AuthModule,
+    DatabaseModule,
+    ConfigModule.forRoot({ envFilePath: `.env` }),
+  ],
   controllers: [],
   providers: [],
 })
