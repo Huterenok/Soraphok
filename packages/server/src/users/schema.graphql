@@ -1,0 +1,32 @@
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  email: String!
+  bio: String
+  avatar: String
+  role: String!
+  isTeacher: Boolean!
+
+  isBanned: Boolean!
+  banReason: String
+}
+
+input CreateUser {
+  email: String!
+  password: String!
+  username: String!
+  bio: String
+  avatar: String
+}
+
+type Query {
+  getAllUsers: [User!]!
+  getUserByEmail(email: String!): User
+	getUserByUsername(username: String!): User
+}
+
+type Mutation {
+  createUser(input: CreateUser): User
+	# changeUser(input: User): User
+}

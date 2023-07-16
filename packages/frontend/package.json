@@ -9,14 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.17",
+    "@lexical/react": "^0.11.1",
     "@types/node": "20.4.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "effector": "^22.8.6",
+    "effector-react": "^22.5.3",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
+    "graphql": "^16.7.1",
+    "lexical": "^0.11.1",
     "next": "13.4.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "styled-components": "^6.0.3",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@types/compose-function": "^0.0.30"
   }
 }

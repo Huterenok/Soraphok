@@ -1,10 +1,9 @@
 import { Global, Module, forwardRef } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 
-import { AuthController } from "./auth.controller";
+import { AuthResolver } from "./auth.resolver";
 import { AuthService } from "./auth.service";
 import { UsersModule } from "src/users/users.module";
-import { JwtAuthGuard } from "./jwt-auth-guard";
 
 @Global()
 @Module({
@@ -17,8 +16,8 @@ import { JwtAuthGuard } from "./jwt-auth-guard";
       },
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthService],
+  controllers: [],
+  providers: [AuthResolver, AuthService],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

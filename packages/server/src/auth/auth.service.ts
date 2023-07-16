@@ -1,10 +1,15 @@
-import { HttpException, HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { User } from "@prisma/client";
 import * as bcrypt from "bcryptjs";
 
-import { UserCreationDto } from "src/users/dto/userCreation.dto";
 import { UsersService } from "src/users/users.service";
+
+import { LoginUser, RegisterUser, User } from "src/graphql";
 
 @Injectable()
 export class AuthService {
@@ -13,11 +18,20 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(dto: UserCreationDto) {
-    const candidate = await this.usersService.getUserByEmail(dto.email);
-    if (candidate) {
+  async register(dto: RegisterUser) {
+    console.log(dto);
+    const candidateByEmail = await this.usersService.getUserByEmail(dto.email);
+    const candidateByUsername = await this.usersService.getUserByUsername(
+      dto.username,
+    );
+    if (candidateByEmail) {
       throw new HttpException(
         "User with this email already exists",
+        HttpStatus.BAD_REQUEST,
+      );
+    } else if (candidateByUsername) {
+      throw new HttpException(
+        "User with this username already exists",
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -33,24 +47,26 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  async login(dto: UserCreationDto) {
-		const user = await this.validateUser(dto);
-		return this.generateToken(user);
-	}
+  async login(dto: LoginUser) {
+    const user = await this.validateUser(dto);
+    return this.generateToken(user);
+  }
 
-  private generateToken(user: User) {
-    const payload = { email: user.email, id: user.id };
+  private generateToken(user: RegisterUser | LoginUser) {
+    const payload = { email: user.email, id: user.password };
     return {
       token: this.jwtService.sign(payload),
     };
   }
 
-	private async validateUser(dto: UserCreationDto) {
-			const user = await this.usersService.getUserByEmail(dto.email);
-			if(user && await bcrypt.compare(dto.password, user.password)) {
-				return user;
-			} else {
-				throw new UnauthorizedException({message: "Incorrect password or email"});
-			}
-	}
+  private async validateUser(dto: RegisterUser | LoginUser) {
+    const user = await this.usersService.getUserByEmail(dto.email);
+    if (user && (await bcrypt.compare(dto.password, user.password))) {
+      return user;
+    } else {
+      throw new UnauthorizedException({
+        message: "Incorrect password or email",
+      });
+    }
+  }
 }

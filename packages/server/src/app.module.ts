@@ -1,25 +1,27 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
+import { join } from "path";
+
+import { GraphQLModule } from "@nestjs/graphql";
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 
 import { AuthModule } from "./auth/auth.module";
 import { DatabaseModule } from "./database/database.module";
 import { UsersModule } from "./users/users.module";
-import { APP_GUARD } from "@nestjs/core";
-import { JwtAuthGuard } from "./auth/jwt-auth-guard";
-
 @Module({
   imports: [
     AuthModule,
     DatabaseModule,
-    ConfigModule.forRoot({ envFilePath: `.env` }),
     UsersModule,
+    ConfigModule.forRoot({ envFilePath: `.env` }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      typePaths: ["./**/*.graphql"],
+      definitions: {
+        path: join(process.cwd(), "src/graphql.ts"),
+      },
+    }),
   ],
   controllers: [],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard,
-    },
-  ],
 })
 export class AppModule {}
