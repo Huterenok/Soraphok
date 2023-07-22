@@ -1,5 +1,25 @@
 services:
-  app:
-    build: 
-      context: /packages/frontend
-      dockerfile: Dockerfile
+  server:
+    build: /packages/server
+    container_name: soraphok-server
+    depends_on:
+      - postgres
+    ports:
+      - 3001:3001
+    restart: always
+    env_file:
+      - ./packages/server/.env
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    ports:
+      - 5432:5432
+    env_file:
+      - ./packages/server/.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres-data:

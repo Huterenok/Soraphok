@@ -1,13 +1,21 @@
-FROM node:18-alpine
+FROM node:18-alpine AS builder
 
-WORKDIR /packages/server
+WORKDIR /server
 
 COPY package*.json ./
+COPY prisma ./prisma/
 
 RUN npm install
 
-COPY . .
+COPY . ./
 
-COPY ./dist ./dist
+RUN npm run build
 
-CMD [ "npm", "run", "start:dev" ]
+FROM node:18-alpine
+
+COPY --from=builder /server/node_modules ./node_modules
+COPY --from=builder /server/package*.json ./
+COPY --from=builder /server/dist ./dist
+
+EXPOSE 3001
+CMD [ "npm", "run", "start:prod" ]
