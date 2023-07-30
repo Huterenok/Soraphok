@@ -1,8 +1,8 @@
 import { compose } from 'shared/lib/compose';
-import { StyledComponentsRegistry } from './with-styled';
 import { WithLayout } from './with-layout';
+import { StyledComponentsRegistry } from './with-styled';
 
 export const WithProviders = compose(
-	WithLayout,
-	StyledComponentsRegistry
+  WithLayout,
+  StyledComponentsRegistry
 );
