@@ -1,0 +1,35 @@
+{
+  "extends":[
+    "next/core-web-vitals", 
+    "airbnb-standard"
+  ],
+  "plugins":[
+    "prettier",
+    "unicorn"
+  ],
+  "env": {
+    "es6": true
+  },
+  "rules": {
+      "import/prefer-default-export": [
+          "off",
+          { "target": "single" }
+      ],
+      "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+          }
+      ],
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
+      "react/jsx-filename-extension": [2, { "extensions": [".ts", ".tsx"] }],
+      "indent": [2, "tab"],
+      "no-tabs": 0,
+      "no-undef":0
+  }
+}

@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url(./fonts/BOLD.woff2) format('woff2');
+	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+:root {
+	--font-family-900: 'Montserrat', sans-serif;
+
+	--font-weight-bold: 600;
+	--font-weight-normal: 400;
+
+	--font-color-black_full: #0A0A0A;
+	--font-color-black100: #131625;
+	--font-color-blue100: #202840;
+	--font-color-blue90: #2A3554;
+	--font-color-blue75: #7B859F;
+	--font-color-blue50: #6EB9D4;
+	--font-color-white100: #E4EBFA;
+	--font-color-yellow100: #F2D877;
+	--font-color-pink100: #D47ED6;
+	--font-color-ultimate100: #8BD7DC;
+
+	--font-size-x-small: 10px;
+	--font-size-small: 12px;
+	--font-size-medium: 16px;
+	--font-size-large: 20px;
+	--font-size-x-large: 24px;
+
+	--bg-color-classic: linear-gradient(91.9deg, #EF57E9 10.65%, #D929D2 100%);
+	--bg-color-premium: linear-gradient(265.33deg, #D9AF29 0%, #ECB12A 100%);
+	--bg-color-ultimate: linear-gradient(87.81deg, #22CCCC -4.2%, #25B4B4 107.01%);
+	--bg-color-blue: linear-gradient(88.62deg, #7250DD 0%, #528BC0 100%);
+	--bg-color-gray: #7B859F;
+	--bg-color-light-classic: rgba(212, 126, 214, 0.4);
+	--bg-color-light-premium: rgba(242, 216, 119, 0.5);
+	--bg-color-light-ultimate: rgba(139, 215, 220, 0.5);
+}
