@@ -1,22 +1,6 @@
 {
-    "extends":["next/core-web-vitals", "airbnb-standard"],
-    "rules": {
-        "import/prefer-default-export": [
-            "off",
-            { "target": "single" }
-        ],
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-              "js": "never",
-              "jsx": "never",
-              "ts": "never",
-              "tsx": "never"
-            }
-        ],
-        "react/react-in-jsx-scope": "off",
-        "react/jsx-uses-react": "off",
-        "react/jsx-filename-extension": [2, { "extensions": [".ts", ".tsx"] }]
-    }
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:storybook/recommended"
+  ]
 }

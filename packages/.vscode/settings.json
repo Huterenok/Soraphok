@@ -15,13 +15,13 @@
   "explorer.confirmDelete": false,
   "editor.insertSpaces": false,
   "editor.linkedEditing": true,
-  "workbench.colorTheme": "One Dark Pro",
   "emmet.triggerExpansionOnTab": true,
   "files.associations": {
-    "*html": "html"
+    "*html": "html",
+		"*.scss":"postcss",
+		"*.module.scss":"postcss",
   },
   "explorer.confirmDragAndDrop": false,
-  "workbench.iconTheme": "moxer-icons",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "eslint.validate": ["javascript"],
   "scss.validate": true,
@@ -41,5 +41,7 @@
   },
   "extensions.ignoreRecommendations": true,
   "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 20
+  "files.autoSaveDelay": 20,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }
