@@ -1,43 +1,43 @@
-import type { CmdKey } from "@milkdown/core";
+// import type { CmdKey } from "@milkdown/core";
 import { editorViewCtx, parserCtx } from "@milkdown/core";
-import { redoCommand, undoCommand } from "@milkdown/plugin-history";
-import {
-  toggleEmphasisCommand,
-  toggleStrongCommand,
-  wrapInBlockquoteCommand,
-  wrapInBulletListCommand,
-  wrapInOrderedListCommand,
-} from "@milkdown/preset-commonmark";
-import {
-  insertTableCommand,
-  toggleStrikethroughCommand,
-} from "@milkdown/preset-gfm";
+// import { redoCommand, undoCommand } from "@milkdown/plugin-history";
+// import {
+//   toggleEmphasisCommand,
+//   toggleStrongCommand,
+//   wrapInBlockquoteCommand,
+//   wrapInBulletListCommand,
+//   wrapInOrderedListCommand,
+// } from "@milkdown/preset-commonmark";
+// import {
+//   insertTableCommand,
+//   toggleStrikethroughCommand,
+// } from "@milkdown/preset-gfm";
 import { Slice } from "@milkdown/prose/model";
 import { Milkdown as Editor } from "@milkdown/react";
-import { callCommand } from "@milkdown/utils";
-import clsx from "clsx";
+// import { callCommand } from "@milkdown/utils";
 import type { FC, RefObject } from "react";
 import { useImperativeHandle } from "react";
 import { usePlayground } from "../../model";
+import { BodyEditor } from "./editorMilkdown.style";
 
-const Button: FC<{ icon: string; onClick?: () => void }> = ({
-  icon,
-  onClick,
-}) => {
-  return (
-    <div
-      className={clsx(
-        "flex h-10 w-10 cursor-pointer items-center justify-center rounded"
-      )}
-      onMouseDown={(e) => {
-        onClick?.();
-        e.preventDefault();
-      }}
-    >
-      <span className="material-symbols-outlined !text-base">{icon}</span>
-    </div>
-  );
-};
+// const Button: FC<{ icon: string; onClick?: () => void }> = ({
+//   icon,
+//   onClick,
+// }) => {
+//   return (
+//     <div
+//       className={clsx(
+//         "flex h-10 w-10 cursor-pointer items-center justify-center rounded"
+//       )}
+//       onMouseDown={(e) => {
+//         onClick?.();
+//         e.preventDefault();
+//       }}
+//     >
+//       <span className="material-symbols-outlined !text-base">{icon}</span>
+//     </div>
+//   );
+// };
 
 interface MilkdownProps {
   content: string;
@@ -77,13 +77,15 @@ export const EditorMilkdown: FC<MilkdownProps> = ({
     },
   }));
 
-  function call<T>(command: CmdKey<T>, payload?: T) {
-    return get()?.action(callCommand(command, payload));
-  }
+  // function call<T>(command: CmdKey<T>, payload?: T) {
+  //   return get()?.action(callCommand(command, payload));
+  // }
 
   return (
-    <div className="relative h-full pt-10">
-      <div className="absolute top-0 h-10 w-full border-b border-nord4 dark:divide-gray-600 dark:border-gray-600">
+    <BodyEditor>
+      <Editor />
+			
+      {/* <div className="absolute top-0 h-10 w-full border-b border-nord4 dark:divide-gray-600 dark:border-gray-600">
         <div className="prose mx-auto flex">
           <Button icon="undo" onClick={() => call(undoCommand.key)} />
           <Button icon="redo" onClick={() => call(redoCommand.key)} />
@@ -115,10 +117,7 @@ export const EditorMilkdown: FC<MilkdownProps> = ({
         </div>
 
         <div />
-      </div>
-      <div className="h-full overflow-auto overscroll-none">
-        <Editor />
-      </div>
-    </div>
+      </div> */}
+    </BodyEditor>
   );
 };

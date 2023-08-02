@@ -6,10 +6,10 @@ import {
   insertHrCommand,
   wrapInHeadingCommand,
 } from "@milkdown/preset-commonmark";
-import { ReactNode } from "react";
 
 type ConfigItem = {
-  renderer: ReactNode;
+  image: string;
+  title: string;
   onSelect: (ctx: Ctx) => void;
 };
 
@@ -30,61 +30,31 @@ export const config: Array<ConfigItem> = [
   {
     onSelect: (ctx: Ctx) =>
       ctx.get(commandsCtx).call(wrapInHeadingCommand.key, 1),
-    renderer: (
-      <div className="flex items-center gap-2">
-        <span className="material-symbols-outlined text-nord-10 dark:text-nord-9">
-          format_h1
-        </span>
-        Large Heading
-      </div>
-    ),
+    image: "",
+    title: "Large Heading",
   },
   {
     onSelect: (ctx: Ctx) =>
       ctx.get(commandsCtx).call(wrapInHeadingCommand.key, 2),
-    renderer: (
-      <div className="flex items-center gap-2">
-        <span className="material-symbols-outlined text-nord-10 dark:text-nord-9">
-          format_h2
-        </span>
-        Medium Heading
-      </div>
-    ),
+    image: "",
+    title: "Medium Heading",
   },
   {
     onSelect: (ctx: Ctx) =>
       ctx.get(commandsCtx).call(wrapInHeadingCommand.key, 3),
-    renderer: (
-      <div className="flex items-center gap-2">
-        <span className="material-symbols-outlined text-nord-10 dark:text-nord-9">
-          format_h3
-        </span>
-        Small Heading
-      </div>
-    ),
+    image: "",
+    title: "Small Heading",
   },
   {
     onSelect: (ctx: Ctx) =>
       ctx.get(commandsCtx).call(createCodeBlockCommand.key),
-    renderer: (
-      <div className="flex items-center gap-2">
-        <span className="material-symbols-outlined text-nord-10 dark:text-nord-9">
-          data_object
-        </span>
-        Code Block
-      </div>
-    ),
+    image: "",
+    title: "Code Block",
   },
   {
     onSelect: (ctx: Ctx) => ctx.get(commandsCtx).call(insertHrCommand.key),
-    renderer: (
-      <div className="flex items-center gap-2">
-        <span className="material-symbols-outlined text-nord-10 dark:text-nord-9">
-          horizontal_rule
-        </span>
-        Divider
-      </div>
-    ),
+    image: "",
+    title: "Divider",
   },
 ].map((item) => ({
   ...item,

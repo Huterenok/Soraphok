@@ -48,7 +48,7 @@ import {
   Diagram,
   FootnoteRef,
   FootnoteDef,
-	imageTooltip,
+  imageTooltip,
   ImageTooltip,
   linkPlugin,
   ListItem,

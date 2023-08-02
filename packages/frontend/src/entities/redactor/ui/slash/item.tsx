@@ -1,22 +1,24 @@
 import { Ctx } from "@milkdown/ctx";
 import { Instance } from "@milkdown/react";
 import { clsx } from "clsx";
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 
 type SlashItemProps = {
   index: number;
   instance: Instance;
   onSelect: (ctx: Ctx) => void;
-  children: ReactNode;
   selected: boolean;
   setSelected: (selected: number) => void;
+  title: string;
+  image: string;
 };
 
 export const SlashItem: FC<SlashItemProps> = ({
   index,
   instance,
   onSelect,
-  children,
+  title,
+  image,
   selected,
   setSelected,
 }) => {
@@ -42,7 +44,14 @@ export const SlashItem: FC<SlashItemProps> = ({
         onPick();
       }}
     >
-      {children}
+      <div className="flex items-center gap-2">
+        <span className="material-symbols-outlined text-nord-10 dark:text-nord-9">
+          {image}
+        </span>
+
+        {title}
+      </div>
+      {/* {children} */}
     </li>
   );
 };

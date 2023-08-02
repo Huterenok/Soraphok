@@ -4,7 +4,6 @@ import { ProviderRedactor, type MilkdownRef } from "entities/redactor";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useCallback, useRef } from "react";
-import { Button } from "shared/ui/Button";
 
 const PlaygroundMilkdown = dynamic(
   () =>
@@ -26,16 +25,13 @@ export function Redactor() {
       <Head>
         <title>Playground | Milkdown</title>
       </Head>
-      <div>
-				<Button />
-        <ProviderRedactor>
-          <PlaygroundMilkdown
-            milkdownRef={milkdownRef}
-            content={"# Hello world!"}
-            onChange={onMilkdownChange}
-          />
-        </ProviderRedactor>
-      </div>
+      <ProviderRedactor>
+        <PlaygroundMilkdown
+          milkdownRef={milkdownRef}
+          content={"# Hello world!"}
+          onChange={onMilkdownChange}
+        />
+      </ProviderRedactor>
     </>
   );
 }

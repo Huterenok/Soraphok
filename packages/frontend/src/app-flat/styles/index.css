@@ -1,2 +1,5 @@
-@import "reset.css"; 
+@import "reset.css";
 @layer reset, base, tokens, recipes, utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

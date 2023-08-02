@@ -33,4 +33,13 @@
     --scale-x: 1;
     --scale-y: 1
     }
+
+  html, body {
+    background: var(--dvDHbQ);
+    height: 100%
+    }
+
+  * {
+    color: var(--iZlVjQ)
+    }
 }

@@ -5,6 +5,7 @@ import { SlashProvider } from "@milkdown/plugin-slash";
 import { useInstance } from "@milkdown/react";
 import { usePluginViewContext } from "@prosemirror-adapter/react";
 import { useEffect, useRef } from "react";
+import { MenuUl } from "./menu.style";
 
 export const Slash = () => {
   const { view, prevState } = usePluginViewContext();
@@ -44,10 +45,11 @@ export const Slash = () => {
     slashProvider.current?.update(view, prevState);
   });
 
+  //className="m-0 w-96 list-none rounded bg-gray-50 shadow-lg ring-2 dark:bg-gray-900"
   return (
     <div className="hidden">
       <div role="tooltip" ref={ref}>
-        <ul className="m-0 w-96 list-none rounded bg-gray-50 shadow-lg ring-2 dark:bg-gray-900">
+        <MenuUl>
           {config.map((item, i) => (
             <SlashItem
               key={i.toString()}
@@ -56,11 +58,11 @@ export const Slash = () => {
               onSelect={(ctx) => item.onSelect(ctx)}
               selected={i === selected}
               setSelected={setSelected}
-            >
-              {item.renderer}
-            </SlashItem>
+              title={item.title}
+              image={item.image}
+            />
           ))}
-        </ul>
+        </MenuUl>
       </div>
     </div>
   );
