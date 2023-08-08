@@ -1,0 +1,40 @@
+.list {
+  min-width: 220px;
+  background-color: var(--color-emphasis-100);
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.listElement {
+  font-size: var(--h4-font-size);
+  color: var(--color-primary-lightest);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  padding: 0 4px;
+  padding-left: 25px;
+  position: relative;
+  user-select: none;
+  &:hover {
+    outline-color: var(--color-primary-lightest);
+    background-color: var(--color-primary-darker);
+    color: var(--text-color);
+    transition: all 0.2s ease-in;
+  }
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-bottom: 2px;
+  }
+}
+
+.buttonTiger {
+  position: relative;
+  display: inline-block;
+}

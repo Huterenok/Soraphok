@@ -1,0 +1,1 @@
+export { NavbarLecturesCourse } from "./lectures";

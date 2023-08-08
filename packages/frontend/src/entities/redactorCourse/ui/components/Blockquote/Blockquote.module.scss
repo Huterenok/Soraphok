@@ -1,0 +1,54 @@
+.Success {
+  --alert-background-color: var(--color-success-contrast-background);
+  --alert-background-color-highlight: var(--color-success-darkest);
+  --alert-foreground-color: var(--color-success-contrast-foreground);
+  --alert-border-color: var(--color-success-dark);
+  --alert-background-btn: var(--color-success-lighter);
+  --alert-border-btn: var(--color-success-darker);
+}
+
+.Info {
+  --alert-background-color: var(--color-info-contrast-background);
+  --alert-background-color-highlight: var(--color-info-darkest);
+  --alert-foreground-color: var(--color-info-contrast-foreground);
+  --alert-border-color: var(--color-info-dark);
+  --alert-background-btn: var(--color-info-lighter);
+  --alert-border-btn: var(--color-info-darker);
+}
+
+.Warning {
+  --alert-background-color: var(--color-warning-contrast-background);
+  --alert-background-color-highlight: var(--color-warning-darkest);
+  --alert-foreground-color: var(--color-warning-contrast-foreground);
+  --alert-border-color: var(--color-warning-dark);
+  --alert-background-btn: var(--color-warning-lighter);
+  --alert-border-btn: var(--color-warning-darker);
+}
+
+.Mistake {
+  --alert-background-color: var(--color-danger-contrast-background);
+  --alert-background-color-highlight: var(--color-danger-darkest);
+  --alert-foreground-color: var(--color-danger-contrast-foreground);
+  --alert-border-color: var(--color-danger-dark);
+  --alert-background-btn: var(--color-danger-lighter);
+  --alert-border-btn: var(--color-danger-darker);
+}
+
+.blockquoteContainer {
+  padding: var(--alert-padding-vertical) var(--alert-padding-horizontal);
+  box-shadow: var(--alert-shadow);
+  color: var(--alert-foreground-color);
+  border-radius: var(--alert-border-radius);
+  background-color: var(--alert-background-color);
+  border-left: var(--alert-border-left-width) solid var(--alert-border-color);
+  margin-bottom: 1em;
+
+  position: relative;
+}
+
+.selectTypeButton {
+  background-color: var(--alert-background-btn);
+  border: 1px solid var(--alert-border-btn);
+	padding: 0.3rem 0.5rem;
+  margin-bottom: 8px;
+}

@@ -1,0 +1,9 @@
+.tooltipButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1.5px solid var(--color-primary-light);
+  background-color: var(--color-primary-darker);
+  padding: 5px 10px;
+}

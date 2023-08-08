@@ -1,0 +1,1 @@
+export { useRefUpdateRedactor, type InitRedactorProps } from "./initRedactor";

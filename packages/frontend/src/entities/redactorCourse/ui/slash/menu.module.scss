@@ -1,0 +1,23 @@
+.menuUl {
+  margin: 0;
+  width: 250px;
+  height: 300px;
+  overflow-y: auto;
+  border-radius: 10px;
+  /* ring: none; */
+  box-shadow: 3px;
+  background: var(--color-secondary-contrast-background);
+}
+
+.menuLi {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.menuLiImage {
+  background: white;
+  box-shadow: var(--color-emphasis-400) 0px 0px 0px 1px;
+}

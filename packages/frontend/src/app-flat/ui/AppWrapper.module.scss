@@ -1,0 +1,9 @@
+.wrapperBody {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainApp {
+  flex: 1 1 auto;
+}
