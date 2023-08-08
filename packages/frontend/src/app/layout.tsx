@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-import { Providers } from "app-flat";
-
-import { montserrat } from "app-flat/styles/fonts";
-import "app-flat/styles/global.css";
-
-export const metadata = {
-  title: "Soraphok",
-  description: "Bebra",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <Providers>
-        <body className={montserrat.className}>{children}</body>
-      </Providers>
-    </html>
-  );
-}
-=======
 import { ProvidersContext } from "app-flat/providers";
 import { AppWrapper } from "app-flat/ui";
 import type { Metadata } from "next";
@@ -40,4 +15,3 @@ const RootLayout = ({ children }: SharedProps) => (
 );
 
 export default RootLayout;
->>>>>>> 029ea15197cb19d590f181fcb43c9ae435642236

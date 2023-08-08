@@ -25,11 +25,7 @@
         // }
       }
     ],
-<<<<<<< HEAD
-		"baseUrl": "./src/"
-=======
     "baseUrl": "./src"
->>>>>>> 029ea15197cb19d590f181fcb43c9ae435642236
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

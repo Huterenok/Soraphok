@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 
 import { GET_USER_BY_EMAIL } from "entities/User/config/schemas";
-import { IUser } from "entities/User/types";
+import { IUser } from "entities/User/config/types";
 
 export const UserCard = () => {
   const { data, loading, error } = useQuery(GET_USER_BY_EMAIL, {
