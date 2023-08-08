@@ -1,0 +1,27 @@
+.liContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.liType {
+  display: flex;
+  height: 1.5rem;
+  align-items: center;
+}
+
+.liBullet {
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--color-primary-lighter);
+}
+
+.liNumber {
+  color: var(--color-primary-lighter);
+}
+
+.liContent {
+  min-width: 0;
+}

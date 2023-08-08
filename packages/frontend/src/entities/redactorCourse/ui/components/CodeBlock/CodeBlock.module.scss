@@ -1,0 +1,14 @@
+.codeWrapper {
+  margin: 1rem 0;
+  border-radius: 0.25rem;
+  padding: 1.25rem;
+  background: var(--highlighted-code-line-bg);
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 5px 10px;
+}
+

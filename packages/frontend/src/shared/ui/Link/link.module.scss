@@ -1,0 +1,9 @@
+.navbar__link {
+  color: var(--navbar-link-color);
+  font-weight: var(--font-weight-semibold);
+}
+
+.navbar__linkActive {
+  color: var(--navbar-link-hover-color);
+  text-decoration: none;
+}

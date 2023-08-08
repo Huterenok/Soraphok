@@ -1,0 +1,21 @@
+.block {
+  border-radius: 3px;
+  height: 26px;
+  width: 15px;
+  position: relative;
+  cursor: grab;
+  border-radius: 3px;
+  border: 2px;
+  background-color: var(--color-emphasis-300);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & svg {
+    fill: var(--color-primary-lightest);
+    width: 14px;
+    height: 14px;
+    display: block;
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,2 @@
+
+export {Redactor} from './redactorPage'

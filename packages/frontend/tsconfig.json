@@ -17,12 +17,15 @@
     "plugins": [
       {
         "name": "next"
+      },
+      {
+        "name": "typescript-plugin-css-modules"
+        // "options": {
+        //   "customTemplate": "./customTemplateCss.js"
+        // }
       }
     ],
-    "baseUrl": "./src",
-    "paths": {
-      "panda/*": ["../styled-system/*"]
-    },
+    "baseUrl": "./src"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

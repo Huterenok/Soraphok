@@ -1,0 +1,1 @@
+export { linksFooter } from "./links";

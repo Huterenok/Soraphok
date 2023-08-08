@@ -1,3 +1,0 @@
-
-
-export {Slash} from './menu'
