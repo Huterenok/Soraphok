@@ -4,12 +4,11 @@ import { ThemeContext, getThemeLS } from "shared/lib/theme";
 import { Theme } from "shared/config/constants";
 
 interface ThemeProviderProps {
-  initialTheme?: Theme;
   children: ReactNode;
 }
 
 export const ThemeProvider = (props: ThemeProviderProps) => {
-  const { initialTheme, children } = props;
+  const { children } = props;
   // const { theme: defaultTheme } = useJsonSettings();
   const [isThemeInited, setThemeInited] = useState(false);
 

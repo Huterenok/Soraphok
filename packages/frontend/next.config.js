@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    DB_URI: process.env.DB_URI,
+    SERVER_URI: process.env.SERVER_URI,
   },
 };
 

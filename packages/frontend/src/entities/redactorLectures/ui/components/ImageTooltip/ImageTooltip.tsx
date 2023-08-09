@@ -79,12 +79,11 @@ export const ImageTooltip: FC = () => {
     //   ctx.get(commandsCtx).call(wrapInOrderedListCommand.key);
     // });
 
-    // getEditor().action((ctx) => {
-    // ctx.get(commandsCtx).call(wrapInOrderedListCommand.key);
-    // ctx.get(commandsCtx)?.call(updateImageCommand.key, {
-    //   [keyImage]: value,
-    // });
-    // });
+    getEditor().action((ctx) => {
+      ctx.get(commandsCtx)?.call(updateImageCommand.key, {
+        src: value,
+      });
+    });
   };
 
   useEffect(() => {
