@@ -1,0 +1,1 @@
+export { getMarkdownPlugin } from "./plugin";

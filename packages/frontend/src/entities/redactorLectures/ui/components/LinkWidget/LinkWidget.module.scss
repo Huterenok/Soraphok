@@ -1,0 +1,11 @@
+.linkLabel {
+  color: var(--color-primary-lighter);
+  font-weight: 300;
+}
+
+.linkInput {
+  padding: 2px 0.5rem;
+  background-color: var(--color-primary-darker);
+  box-shadow: none 0 0 0 calc(1px) var(--color-primary-light);
+  border-radius: 0.25rem;
+}

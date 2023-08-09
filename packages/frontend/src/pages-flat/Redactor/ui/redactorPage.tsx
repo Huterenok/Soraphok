@@ -23,7 +23,7 @@ export function Redactor() {
               <RedactorWrapper />
             </div>
 
-            {/* <NavbarTopicsCourse /> */}
+            <NavbarTopicsCourse />
           </div>
         </main>
       </div>

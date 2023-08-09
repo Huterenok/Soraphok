@@ -1,0 +1,29 @@
+.menuEmoji {
+  margin: 0;
+  width: 18rem;
+  height: 300px;
+  overflow: auto;
+  background-color: var(--color-emphasis-100);
+  border-radius: 0.25rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.itemEmoji {
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0.75rem 1.5rem;
+}
+
+.itemEmojiSelect {
+  background-color: var(--color-emphasis-300);
+}
+
+// w-[1em] h-[1em] inline align-text-top
+
+.emojiClass {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline;
+  // align-items: center;
+}

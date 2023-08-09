@@ -1,0 +1,1 @@
+export { headingAnchorPlugin } from "./headingAnchorPlugin";
