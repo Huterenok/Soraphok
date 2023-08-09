@@ -3,8 +3,6 @@ export {
   Block,
   CodeBlock,
   Diagram,
-  imageTooltip,
-  ImageTooltip,
   LinkWidgetBefore,
   LinkWidgetAfter,
   linkPlugin,
@@ -16,6 +14,7 @@ export {
   tableSelectorPlugin,
   Blockquote,
   HeadingWidget,
+	ImageMarkdown,
 } from "./components";
 export { EmojiMenu, emojiClass } from "./emoji";
 export { Slash } from "./slash";

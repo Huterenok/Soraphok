@@ -11,7 +11,6 @@ import {
 export const ListItem: FC = () => {
   const { contentRef, node, setAttrs } = useNodeViewContext();
   const { attrs } = node;
-  console.log(attrs);
   const checked = attrs?.checked;
   const isBullet = attrs?.listType === "bullet";
 

@@ -1,0 +1,30 @@
+.wrapperImage {
+  margin: 0 auto;
+  width: 80% !important;
+  height: 80% !important;
+  position: relative;
+}
+
+.image {
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none;
+}
+
+.resizeImg {
+  position: absolute;
+  width: 6px;
+  height: 55px;
+  border-radius: 20px;
+  background-color: var(--color-emphasis-200);
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: col-resize;
+}
+
+.titleImg {
+  color: var(--color-emphasis-300);
+  font-size: 12px;
+  margin-top: 5px;
+}

@@ -1,4 +1,4 @@
-"use cleint";
+"use client";
 import { formLabel, inputLabel, titleLabel } from "./formLabel.module.scss";
 import debounce from "lodash.debounce";
 
@@ -16,20 +16,23 @@ export const FormLabel = ({
   onChange,
 }: FormLabel) => {
   return (
-    <div className={formLabel}>
+    <fieldset
+      className={formLabel}
+      onSelect={(event) => event.preventDefault()}
+    >
       <span className={titleLabel}>{title}</span>
+
       <input
         onBlur={(e) => {
           onChange(keyImage, e.target.value);
         }}
         onChange={debounce((e) => {
-          console.log(e.target.value);
           onChange(keyImage, e.target.value);
         }, 500)}
         type="text"
         className={inputLabel}
         defaultValue={defaultValue}
       />
-    </div>
+    </fieldset>
   );
 };

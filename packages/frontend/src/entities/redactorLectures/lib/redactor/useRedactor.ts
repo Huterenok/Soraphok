@@ -26,6 +26,7 @@ import {
   paragraphAttr,
   headingSchema,
   wrapInHeadingInputRule,
+  imageSchema,
 } from "@milkdown/preset-commonmark";
 import { gfm } from "@milkdown/preset-gfm";
 import { useEditor } from "@milkdown/react";
@@ -51,8 +52,6 @@ import {
   Block,
   CodeBlock,
   Diagram,
-  imageTooltip,
-  ImageTooltip,
   linkPlugin,
   ListItem,
   MathBlock,
@@ -62,6 +61,7 @@ import {
   tableSelectorPlugin,
   Blockquote,
   emojiClass,
+  ImageMarkdown,
 } from "../../ui";
 import { encode } from "shared/lib/crypto";
 import { addTopics, getMarkdownPlugin } from "../../model";
@@ -185,11 +185,6 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
               ...prev,
               configureRefractor: () => refractor,
             }));
-            ctx.set(imageTooltip.key, {
-              view: pluginViewFactory({
-                component: ImageTooltip,
-              }),
-            });
             slash.config(ctx);
             emojiMenu.config(ctx);
           })
@@ -206,13 +201,17 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
           .use(indent)
           .use(upload)
           .use(trailing)
-          .use(imageTooltip)
           .use(slash.plugins)
           .use(headingAnchorPlugin(widgetViewFactory, addTopicsUnit))
           // .use([IframeNode, remarkDirectiveIframe, inputIframeRule])
           .use(
             $view(listItemSchema.node, () =>
               nodeViewFactory({ component: ListItem })
+            )
+          )
+          .use(
+            $view(imageSchema.node, () =>
+              nodeViewFactory({ component: ImageMarkdown })
             )
           )
           .use(
