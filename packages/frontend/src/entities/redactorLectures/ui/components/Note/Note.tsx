@@ -1,11 +1,8 @@
 import { useNodeViewContext } from "@prosemirror-adapter/react";
 import { useState } from "react";
 
-import {
-  blockquoteContainer,
-  selectTypeButton,
-} from "./Blockquote.module.scss";
-import * as status from "./Blockquote.module.scss";
+import { blockquoteContainer, selectTypeButton } from "./Note.module.scss";
+import * as status from "./Note.module.scss";
 import { DropDown } from "shared/ui/DropDown";
 import { StatusBlockquote } from "../../../config";
 import info from "./img/info.svg";
@@ -14,10 +11,10 @@ import success from "./img/success.svg";
 import mistake from "./img/mistake.svg";
 import clsx from "clsx";
 
-export const Blockquote = () => {
+export const Note = () => {
   const { contentRef, node } = useNodeViewContext();
-	console.log(node.attrs);
-	
+  console.log(node.attrs);
+
   const [selectStatus, setStatus] = useState<StatusBlockquote>(
     StatusBlockquote.INFO
   );
@@ -31,7 +28,7 @@ export const Blockquote = () => {
   }
 
   return (
-    <blockquote
+    <div
       className={clsx(blockquoteContainer, status[selectStatus])}
       ref={contentRef}
     >
@@ -44,6 +41,6 @@ export const Blockquote = () => {
           setStatus(newElement as StatusBlockquote);
         }}
       />
-    </blockquote>
+    </div>
   );
 };

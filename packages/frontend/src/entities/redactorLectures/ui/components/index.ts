@@ -10,6 +10,6 @@ export {
   TableTooltip,
   tableSelectorPlugin,
 } from "./Table";
-export { Blockquote } from "./Blockquote";
+export { Note } from "./Note";
 export {HeadingWidget} from './HeadingAnchor'
 export {ImageMarkdown} from './Image'

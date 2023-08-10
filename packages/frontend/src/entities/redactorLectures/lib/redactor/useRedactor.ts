@@ -27,6 +27,7 @@ import {
   headingSchema,
   wrapInHeadingInputRule,
   imageSchema,
+  blockquoteAttr,
 } from "@milkdown/preset-commonmark";
 import { gfm } from "@milkdown/preset-gfm";
 import { useEditor } from "@milkdown/react";
@@ -59,7 +60,7 @@ import {
   tableTooltip,
   TableTooltip,
   tableSelectorPlugin,
-  Blockquote,
+  Note,
   emojiClass,
   ImageMarkdown,
 } from "../../ui";
@@ -67,7 +68,8 @@ import { encode } from "shared/lib/crypto";
 import { addTopics, getMarkdownPlugin } from "../../model";
 import { headingAnchorPlugin } from "../anchorPlugin";
 import { useUnit } from "effector-react";
-// import { IframeNode, remarkDirectiveIframe, inputIframeRule } from "../Iframe";
+import { IframeNode, remarkDirectiveIframe, inputIframeRule } from "../Iframe";
+import { remarkDirectiveNote, NoteNode, inputNote } from "../note";
 
 export const useRedactor = (onChange: (markdown: string) => void) => {
   const pluginViewFactory = usePluginViewFactory();
@@ -172,6 +174,10 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
             ctx.set(rootCtx, root);
             ctx.set(defaultValueCtx, "# hello");
 
+            ctx.set(blockquoteAttr.key, () => ({
+              class: "heelllo",
+            }));
+
             ctx
               .get(listenerCtx)
               .markdownUpdated((_, markdown) => {
@@ -203,7 +209,9 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
           .use(trailing)
           .use(slash.plugins)
           .use(headingAnchorPlugin(widgetViewFactory, addTopicsUnit))
-          // .use([IframeNode, remarkDirectiveIframe, inputIframeRule])
+          .use([IframeNode, remarkDirectiveIframe, inputIframeRule])
+          .use([remarkDirectiveNote, NoteNode, inputNote])
+          .use($view(NoteNode, () => nodeViewFactory({ component: Note })))
           .use(
             $view(listItemSchema.node, () =>
               nodeViewFactory({ component: ListItem })
@@ -219,11 +227,14 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
               nodeViewFactory({ component: CodeBlock })
             )
           )
-          .use(
-            $view(blockquoteSchema.node, () =>
-              nodeViewFactory({ component: Blockquote })
-            )
-          )
+        // .use(
+        //   $view(blockquoteSchema.node, () =>
+        //     nodeViewFactory({
+        //       component: Blockquote,
+        //       // update: (node) => console.log("d"),
+        //     })
+        //   )
+        // )
       );
     },
     [onChange]

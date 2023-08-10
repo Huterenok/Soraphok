@@ -12,7 +12,6 @@ export const useSlashStateEmoji = (instance: Instance) => {
   const [search, setSearch] = useState("");
 
   const emojis = useMemo(() => {
-    console.log(search);
     if (search.length === 0) {
       return [];
     }

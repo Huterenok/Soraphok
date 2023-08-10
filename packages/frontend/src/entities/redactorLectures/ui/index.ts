@@ -12,7 +12,7 @@ export {
   tableTooltip,
   TableTooltip,
   tableSelectorPlugin,
-  Blockquote,
+  Note,
   HeadingWidget,
 	ImageMarkdown,
 } from "./components";

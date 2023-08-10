@@ -2,7 +2,6 @@ import { useNodeViewContext } from "@prosemirror-adapter/react";
 import Image from "next/image";
 import { image, wrapperImage, resizeImg, titleImg } from "./Image.module.scss";
 import { ModalImage, attrsImage } from "./modal/modal";
-import debounce from "lodash.debounce";
 
 export const ImageMarkdown = () => {
   const { node, setAttrs } = useNodeViewContext();
