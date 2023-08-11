@@ -14,7 +14,7 @@ export {
   tableSelectorPlugin,
   Note,
   HeadingWidget,
-	ImageMarkdown,
+  ImageMarkdown,
 } from "./components";
 export { EmojiMenu, emojiClass } from "./emoji";
 export { Slash } from "./slash";
@@ -24,5 +24,5 @@ export {
   FeatureToggleProvider,
   ProseStateProvider,
   ShareProvider,
-  InspectorProvider,
 } from "./providers";
+export { HeaderLesson } from "./header";

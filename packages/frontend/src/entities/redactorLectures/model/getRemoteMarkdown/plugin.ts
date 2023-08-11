@@ -9,9 +9,7 @@ export const getMarkdownPlugin: MilkdownPlugin = (ctx) => {
   return async () => {
     ctx.update(editorStateTimerCtx, (timers) => timers.concat(RemoteTimer));
     const defaultMarkdown = `
-		# Hello world!
-  
-  ![greeting bear](https://milkdown.dev/polar.jpeg)
+		::note{type="Info" title="clal" text="dds"}
 		`; // await fetchMarkdownAPI()
     ctx.set(defaultValueCtx, defaultMarkdown);
 

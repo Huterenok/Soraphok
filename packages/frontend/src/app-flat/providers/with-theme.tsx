@@ -9,11 +9,10 @@ interface ThemeProviderProps {
 
 export const ThemeProvider = (props: ThemeProviderProps) => {
   const { children } = props;
-  // const { theme: defaultTheme } = useJsonSettings();
   const [isThemeInited, setThemeInited] = useState(false);
 
   const [theme, setTheme] = useState<Theme>(
-    getThemeLS() || Theme.LIGHT // defaultTheme
+    getThemeLS() || Theme.LIGHT // getThemeLS()
   );
 
   useEffect(() => {

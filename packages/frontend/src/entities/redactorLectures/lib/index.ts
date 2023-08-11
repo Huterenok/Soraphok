@@ -11,7 +11,6 @@ export { useSlashStateMenu } from "./slashMenu";
 
 export { setShowCtx, useToast, type ToastType, type Show } from "./toast";
 
-export { inspectorCtx, setInspectorCtx } from "./inspector";
 
 export { shareCtx, setShareCtx, type Share } from "./share";
 

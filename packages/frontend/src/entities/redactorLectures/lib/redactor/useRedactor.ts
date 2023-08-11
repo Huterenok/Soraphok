@@ -44,7 +44,6 @@ import { refractor } from "refractor/lib/common";
 import { useSlash } from "../slashMenu/useSlash";
 import { useEmojiMenu } from "../emoji";
 import { useFeatureToggle } from "../featureToggle";
-import { useSetInspector } from "../inspector";
 import { useSetShare } from "../share";
 import { useToast } from "../toast";
 import { useSetProseState } from "../proseState";
@@ -70,6 +69,7 @@ import { headingAnchorPlugin } from "../anchorPlugin";
 import { useUnit } from "effector-react";
 import { IframeNode, remarkDirectiveIframe, inputIframeRule } from "../Iframe";
 import { remarkDirectiveNote, NoteNode, inputNote } from "../note";
+import { usePlaceholderPlugin } from "../placeholder";
 
 export const useRedactor = (onChange: (markdown: string) => void) => {
   const pluginViewFactory = usePluginViewFactory();
@@ -77,7 +77,6 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
   const widgetViewFactory = useWidgetViewFactory();
   const setProseState = useSetProseState();
   const setShare = useSetShare();
-  const setInspector = useSetInspector();
   const toast = useToast();
   const {
     enableGFM,
@@ -86,6 +85,7 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
     enableBlockHandle,
     enableTwemoji,
   } = useFeatureToggle();
+  const placeholderPlugin = usePlaceholderPlugin();
 
   const gfmPlugins: MilkdownPlugin[] = useMemo(() => {
     return [
@@ -172,12 +172,6 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
             }));
 
             ctx.set(rootCtx, root);
-            ctx.set(defaultValueCtx, "# hello");
-
-            ctx.set(blockquoteAttr.key, () => ({
-              class: "heelllo",
-            }));
-
             ctx
               .get(listenerCtx)
               .markdownUpdated((_, markdown) => {
@@ -195,6 +189,7 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
             emojiMenu.config(ctx);
           })
           .use(getMarkdownPlugin)
+          .use(placeholderPlugin)
           // .config(nord)
           .use(emojiMenu.plugins)
           .use(commonmark)
@@ -227,14 +222,6 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
               nodeViewFactory({ component: CodeBlock })
             )
           )
-        // .use(
-        //   $view(blockquoteSchema.node, () =>
-        //     nodeViewFactory({
-        //       component: Blockquote,
-        //       // update: (node) => console.log("d"),
-        //     })
-        //   )
-        // )
       );
     },
     [onChange]
@@ -276,7 +263,6 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
 
         await editor.create();
 
-        setInspector(() => editor.inspect());
       };
 
       effect().catch((e) => {
@@ -296,7 +282,6 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
     enableDiagram,
     enableBlockHandle,
     enableTwemoji,
-    setInspector,
   ]);
 
   const router = useRouter();

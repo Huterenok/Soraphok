@@ -7,7 +7,6 @@ export const getEnvVar = (key: string) => {
 
   return env || "";
 };
-
 export const NEXT_PUBLIC = "NEXT_PUBLIC_";
 // export const NAME_SERVICE = getEnvVar(`${NEXT_PUBLIC}NAME_SERVICE`);
 // export const SERVER_URI = getEnvVar(`SERVER_URI`);

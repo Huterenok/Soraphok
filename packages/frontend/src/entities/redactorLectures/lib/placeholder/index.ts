@@ -1,0 +1,1 @@
+export {usePlaceholderPlugin} from './plugin'

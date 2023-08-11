@@ -11,5 +11,6 @@ export {
   tableSelectorPlugin,
 } from "./Table";
 export { Note } from "./Note";
-export {HeadingWidget} from './HeadingAnchor'
-export {ImageMarkdown} from './Image'
+export { HeadingWidget } from "./HeadingAnchor";
+export { ImageMarkdown } from "./Image";
+export { TooltipFile } from "./TooltipFile";

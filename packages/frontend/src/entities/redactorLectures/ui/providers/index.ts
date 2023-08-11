@@ -6,7 +6,6 @@ import { MilkdownProvider } from "@milkdown/react";
 import { ProsemirrorAdapterProvider } from "@prosemirror-adapter/react";
 import { ProseStateProvider } from "./prose";
 import { ShareProvider } from "./share";
-import { InspectorProvider } from "./inspector";
 
 const ProviderRedactor = compose(
   FeatureToggleProvider,
@@ -14,7 +13,6 @@ const ProviderRedactor = compose(
   ProsemirrorAdapterProvider,
   ProseStateProvider,
   ShareProvider,
-  InspectorProvider
 );
 
 export {
@@ -22,5 +20,4 @@ export {
   FeatureToggleProvider,
   ProseStateProvider,
   ShareProvider,
-  InspectorProvider,
 };

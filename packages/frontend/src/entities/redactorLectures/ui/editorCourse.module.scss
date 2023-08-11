@@ -6,16 +6,9 @@
   border-radius: 10px;
   height: 100%;
   overflow: hidden;
-
-  // & div {
-  //   height: 100%;
-  // }
+  width: 100%;
 
   div[data-milkdown-root] {
     height: 100%;
   }
 }
-
-// .ProseMirror {
-//   outline: none !important;
-// }

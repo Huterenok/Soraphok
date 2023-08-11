@@ -1,7 +1,8 @@
 import { useNodeViewContext } from "@prosemirror-adapter/react";
 import Image from "next/image";
 import { image, wrapperImage, resizeImg, titleImg } from "./Image.module.scss";
-import { ModalImage, attrsImage } from "./modal/modal";
+import { TooltipImage, attrsImage } from "./tooltip/tooltip";
+// import { Rnd } from "react-rnd";
 
 export const ImageMarkdown = () => {
   const { node, setAttrs } = useNodeViewContext();
@@ -17,7 +18,17 @@ export const ImageMarkdown = () => {
 
   return (
     <div className={wrapperImage}>
-      <ModalImage onChange={onChange} attrs={attrs as attrsImage} />
+      {/* <Rnd
+        default={{
+          x: 0,
+          y: 0,
+          width: "100%",
+          height: "100%",
+        }}
+        disableDragging
+      >
+        <div> */}
+      <TooltipImage onChange={onChange} attrs={attrs as attrsImage} />
       <Image
         className={image}
         src={attrs.src}
@@ -28,6 +39,8 @@ export const ImageMarkdown = () => {
       />
 
       <div className={resizeImg} />
+      {/* </div>
+      </Rnd> */}
 
       <p className={titleImg}>{attrs.title}</p>
     </div>

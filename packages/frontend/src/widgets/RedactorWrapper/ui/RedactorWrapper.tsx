@@ -1,8 +1,12 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-
-import { ProviderRedactor, type MilkdownRef } from "entities/redactorLectures";
+import { redactorLessonWrapper } from "./RedactorWrapper.module.scss";
+import {
+  ProviderRedactor,
+  type MilkdownRef,
+  HeaderLesson,
+} from "entities/redactorLectures";
 import dynamic from "next/dynamic";
 
 const RedactorCourse = dynamic(
@@ -21,12 +25,14 @@ export const RedactorWrapper = () => {
   const onMilkdownChange = useCallback((markdown: string) => {
     // console.log(markdown);
   }, []);
+
   return (
-    <ProviderRedactor>
-      <RedactorCourse
-        milkdownRef={milkdownRef}
-        onChange={onMilkdownChange}
-      />
-    </ProviderRedactor>
+    <div className={redactorLessonWrapper}>
+      <HeaderLesson />
+
+      <ProviderRedactor>
+        <RedactorCourse milkdownRef={milkdownRef} onChange={onMilkdownChange} />
+      </ProviderRedactor>
+    </div>
   );
 };

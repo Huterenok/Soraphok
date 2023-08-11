@@ -1,7 +1,11 @@
 import { useNodeViewContext } from "@prosemirror-adapter/react";
-import { useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
-import { blockquoteContainer, selectTypeButton } from "./Note.module.scss";
+import {
+  blockquoteContainer,
+  selectTypeButton,
+  inputText,
+} from "./Note.module.scss";
 import * as status from "./Note.module.scss";
 import { DropDown } from "shared/ui/DropDown";
 import { StatusBlockquote } from "../../../config";
@@ -12,34 +16,55 @@ import mistake from "./img/mistake.svg";
 import clsx from "clsx";
 
 export const Note = () => {
-  const { contentRef, node } = useNodeViewContext();
-  console.log(node.attrs);
+  const { node, setAttrs } = useNodeViewContext();
+  const { type, title, text } = node.attrs;
+  const [textLocal, setTextLocal] = useState("");
 
-  const [selectStatus, setStatus] = useState<StatusBlockquote>(
-    StatusBlockquote.INFO
-  );
   let iconMenu = info;
-  if (selectStatus === StatusBlockquote.WARNING) {
+  if (type === StatusBlockquote.WARNING) {
     iconMenu = warning;
-  } else if (selectStatus === StatusBlockquote.MISTAKE) {
+  } else if (type === StatusBlockquote.MISTAKE) {
     iconMenu = mistake;
   } else {
     iconMenu = success;
   }
 
+  const onChangeText = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => () => {
+      const { value } = event.target;
+      console.log(value);
+      // setAttrs({
+      //   text: value,
+      //   type,
+      //   title,
+      // });
+      setTextLocal(value);
+    },
+    [setAttrs, title, type]
+  );
+
   return (
     <div
-      className={clsx(blockquoteContainer, status[selectStatus])}
-      ref={contentRef}
+      className={clsx(blockquoteContainer, status[type as StatusBlockquote])}
     >
       <DropDown
         iconMenu={iconMenu}
         buttonSelectClass={selectTypeButton}
-        selectElement={selectStatus}
+        selectElement={type}
         elemets={Object.values(StatusBlockquote)}
         onChangeElemet={(newElement: string) => () => {
-          setStatus(newElement as StatusBlockquote);
+          setAttrs({
+            type: newElement,
+            title,
+            text,
+          });
         }}
+      />
+
+      <input
+        className={inputText}
+        value={textLocal}
+        onChange={(event) => console.log(event.target.value)}
       />
     </div>
   );

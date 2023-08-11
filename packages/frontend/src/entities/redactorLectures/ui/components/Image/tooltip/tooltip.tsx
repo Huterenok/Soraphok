@@ -12,7 +12,7 @@ import {
 } from "@radix-ui/react-tabs";
 import menu from "./img/menu.svg";
 import { FormLabel } from "./formLabel/formLabel";
-import { openMenu, tooltipCommon } from "./modal.module.scss";
+import { openMenu, tooltipCommon } from "./tooltip.module.scss";
 import Image from "next/image";
 
 export interface attrsImage {
@@ -21,12 +21,12 @@ export interface attrsImage {
   title: string;
 }
 
-interface ModalImageProps {
+interface TooltipImageProps {
   onChange: (keyImage: string, value: string) => void;
   attrs: attrsImage;
 }
 
-export const ModalImage = ({ attrs, onChange }: ModalImageProps) => {
+export const TooltipImage = ({ attrs, onChange }: TooltipImageProps) => {
   const { src, alt, title } = attrs;
 
   return (
