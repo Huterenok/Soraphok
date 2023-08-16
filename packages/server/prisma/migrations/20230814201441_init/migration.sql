@@ -10,6 +10,7 @@ CREATE TABLE "users" (
     "bio" TEXT,
     "avatar" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
+    "isTeacher" BOOLEAN NOT NULL DEFAULT false,
     "isBanned" BOOLEAN NOT NULL DEFAULT false,
     "banReason" TEXT,
 
@@ -17,4 +18,10 @@ CREATE TABLE "users" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE INDEX "users_email_username_idx" ON "users"("email", "username");

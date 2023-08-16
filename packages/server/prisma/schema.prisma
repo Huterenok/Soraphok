@@ -24,6 +24,7 @@ model User {
 	banReason String?
 
 	@@map("users")
+	@@index([email, username])
 }
 
 enum Role {

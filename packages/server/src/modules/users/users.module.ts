@@ -1,8 +1,8 @@
 import { Module, forwardRef } from "@nestjs/common";
 
 import { UsersService } from "./users.service";
-import { DatabaseModule } from "src/database/database.module";
-import { AuthModule } from "src/auth/auth.module";
+import { DatabaseModule } from "src/config/database/database.module";
+import { AuthModule } from "src/modules/auth/auth.module";
 import { UsersResolvers } from "./users.resolver";
 
 @Module({

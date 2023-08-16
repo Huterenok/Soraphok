@@ -18,7 +18,7 @@ import clsx from "clsx";
 export const Note = () => {
   const { node, setAttrs } = useNodeViewContext();
   const { type, title, text } = node.attrs;
-  const [textLocal, setTextLocal] = useState("");
+  const [textLocal, setTextLocal] = useState(text);
 
   let iconMenu = info;
   if (type === StatusBlockquote.WARNING) {
@@ -33,14 +33,12 @@ export const Note = () => {
     (event: ChangeEvent<HTMLInputElement>) => () => {
       const { value } = event.target;
       console.log(value);
-      // setAttrs({
-      //   text: value,
-      //   type,
-      //   title,
-      // });
-      setTextLocal(value);
+      setAttrs({
+        text: value
+      });
+			setTextLocal(value)
     },
-    [setAttrs, title, type]
+    [setAttrs]
   );
 
   return (
@@ -58,14 +56,11 @@ export const Note = () => {
             title,
             text,
           });
+          console.log("drop down menu");
         }}
       />
 
-      <input
-        className={inputText}
-        value={textLocal}
-        onChange={(event) => console.log(event.target.value)}
-      />
+      <input className={inputText} value={textLocal} onChange={onChangeText} />
     </div>
   );
 };

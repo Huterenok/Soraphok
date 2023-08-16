@@ -20,13 +20,20 @@ input CreateUser {
   avatar: String
 }
 
+input UpdateUser {
+  bio: String
+  avatar: String
+}
+
 type Query {
-  getAllUsers: [User!]!
-  getUserByEmail(email: String!): User
-	getUserByUsername(username: String!): User
+  getUserById(id: Int!): User
+  getAllUsers(limit: Int): [User!]!
+  getUserByUsername(username: String!): User
+	whoami: User
 }
 
 type Mutation {
   createUser(input: CreateUser): User
-	# changeUser(input: User): User
+  updateUser(input: UpdateUser): User
+  becomeTeacher: User
 }

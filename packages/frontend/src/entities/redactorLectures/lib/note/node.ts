@@ -26,7 +26,7 @@ export const NoteNode = $node("note", (ctx) => ({
   ],
   toDOM: (node: Node) => [
     "section",
-    { ...node.attrs, contenteditable: false },
+    { ...node.attrs, contenteditable: true },
     0,
   ],
   parseMarkdown: {
@@ -62,10 +62,12 @@ export const inputNote = $inputRule((ctx) => {
       const { tr } = state;
 
       if (okay) {
+				let noteNode = NoteNode.type(ctx).create({ type, title, text });
+				console.log(noteNode)
         tr.replaceWith(
           start - 1,
           end,
-          NoteNode.type(ctx).create({ type, title, text })
+          noteNode
         );
       }
 

@@ -27,14 +27,27 @@ export interface CreateUser {
     avatar?: Nullable<string>;
 }
 
+export interface UpdateUser {
+    bio?: Nullable<string>;
+    avatar?: Nullable<string>;
+}
+
 export interface Token {
-    token: string;
+    id: number;
+    iat: number;
+    exp: number;
+}
+
+export interface AuthPayload {
+    token?: Nullable<string>;
 }
 
 export interface IMutation {
-    loginUser(input?: Nullable<LoginUser>): Nullable<Token> | Promise<Nullable<Token>>;
-    registerUser(input?: Nullable<RegisterUser>): Nullable<Token> | Promise<Nullable<Token>>;
+    loginUser(input?: Nullable<LoginUser>): Nullable<AuthPayload> | Promise<Nullable<AuthPayload>>;
+    registerUser(input?: Nullable<RegisterUser>): Nullable<AuthPayload> | Promise<Nullable<AuthPayload>>;
     createUser(input?: Nullable<CreateUser>): Nullable<User> | Promise<Nullable<User>>;
+    updateUser(input?: Nullable<UpdateUser>): Nullable<User> | Promise<Nullable<User>>;
+    becomeTeacher(): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export interface User {
@@ -51,9 +64,10 @@ export interface User {
 }
 
 export interface IQuery {
-    getAllUsers(): User[] | Promise<User[]>;
-    getUserByEmail(email: string): Nullable<User> | Promise<Nullable<User>>;
+    getUserById(id: number): Nullable<User> | Promise<Nullable<User>>;
+    getAllUsers(limit?: Nullable<number>): User[] | Promise<User[]>;
     getUserByUsername(username: string): Nullable<User> | Promise<Nullable<User>>;
+    whoami(): Nullable<User> | Promise<Nullable<User>>;
 }
 
 type Nullable<T> = T | null;

@@ -7,9 +7,10 @@ import {
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcryptjs";
 
-import { UsersService } from "src/users/users.service";
+import { User } from "@prisma/client";
 
-import { LoginUser, RegisterUser, User } from "src/graphql";
+import { UsersService } from "src/modules/users/users.service";
+import { LoginUser, RegisterUser } from "src/types/graphql";
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,6 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterUser) {
-    console.log(dto);
     const candidateByEmail = await this.usersService.getUserByEmail(dto.email);
     const candidateByUsername = await this.usersService.getUserByUsername(
       dto.username,
@@ -52,8 +52,8 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  private generateToken(user: RegisterUser | LoginUser) {
-    const payload = { email: user.email, id: user.password };
+  private generateToken(user: User) {
+    const payload = { id: user.id };
     return {
       token: this.jwtService.sign(payload),
     };
