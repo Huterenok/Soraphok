@@ -10,24 +10,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id Int     @default(autoincrement()) @id
-	username String? @unique
-	password String
-  email String  @unique
-	bio String?
-	avatar String?
-	role Role @default(USER)
-	isTeacher Boolean @default(false)
-
-	isBanned Boolean @default(false)
-	banReason String?
-
-	@@map("users")
-	@@index([email, username])
+enum Role {
+  USER
+  ADMIN
 }
 
-enum Role {
-	USER
-	ADMIN
+model User {
+  id       Int     @id @default(autoincrement())
+  username String? @unique
+  password String
+  email    String  @unique
+  bio      String?
+  avatar   String?
+  role     Role    @default(USER)
+
+  articles  Article[]
+  isTeacher Boolean   @default(false)
+  //TODO
+  folders   Folder[]
+
+  favoriteArticles Article[] @relation("favoriteArticles")
+  favoriteFolders  Folder[]  @relation("favoriteFolders")
+
+  isBanned  Boolean @default(false)
+  banReason String?
+
+  @@index([email, username])
+  @@map("users")
+}
+
+model Article {
+  id       Int    @id @default(autoincrement())
+  title    String
+  content  String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId Int
+  folder   Folder @relation(fields: [folderId], references: [id])
+  folderId Int
+
+  users User[] @relation("favoriteArticles")
+
+  @@index([title, authorId])
+  @@map("articles")
+}
+
+model Folder {
+  id         Int       @id @default(autoincrement())
+  name       String
+  decription String
+  author     User      @relation(fields: [authorId], references: [id])
+  authorId   Int
+
+  articles   Article[]
+
+  users User[] @relation("favoriteFolders")
+
+  @@index([name, authorId])
+  @@map("folders")
 }
