@@ -1,8 +1,14 @@
 import { Injectable } from "@nestjs/common";
 
+import {
+  AlreadyTeacher,
+  UserByIdNotFound,
+  UserByUsernameNotFound,
+} from "./exception";
+
 import { DatabaseService } from "src/config/database/database.service";
+
 import { CreateUser, UpdateUser } from "src/types/graphql";
-import { UserNotFound } from "./exception";
 
 @Injectable()
 export class UsersService {
@@ -22,13 +28,11 @@ export class UsersService {
 
   async getUserById(id: number) {
     const user = await this.database.user.findFirst({ where: { id } });
-
     return user;
   }
 
   async getUserByEmail(email: string) {
     const user = await this.database.user.findFirst({ where: { email } });
-
     return user;
   }
 
@@ -37,7 +41,7 @@ export class UsersService {
     return user;
   }
 
-  async changeUser(id: number, dto: UpdateUser) {
+  async updateUser(id: number, dto: UpdateUser) {
     const user = this.database.user.update({
       where: {
         id,
@@ -48,6 +52,14 @@ export class UsersService {
   }
 
   async becomeTeacher(id: number) {
+    const userById = await this.getUserById(id);
+
+    if (!userById) {
+      throw new UserByIdNotFound(id);
+    } else if (userById.isTeacher) {
+      throw new AlreadyTeacher();
+    }
+
     const user = this.database.user.update({
       where: {
         id,

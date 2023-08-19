@@ -29,8 +29,8 @@ model User {
   //TODO
   folders   Folder[]
 
-  favoriteArticles Article[] @relation("favoriteArticles")
-  favoriteFolders  Folder[]  @relation("favoriteFolders")
+  favoriteArticles Article[] @relation("favouriteArticles")
+  favoriteFolders  Folder[]  @relation("favouriteFolders")
 
   isBanned  Boolean @default(false)
   banReason String?
@@ -40,30 +40,37 @@ model User {
 }
 
 model Article {
-  id       Int    @id @default(autoincrement())
-  title    String
-  content  String
-  author   User   @relation(fields: [authorId], references: [id])
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+
+  author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId Int
-  folder   Folder @relation(fields: [folderId], references: [id])
+
+  folder   Folder @relation(fields: [folderId], references: [id], onDelete: Cascade)
   folderId Int
 
-  users User[] @relation("favoriteArticles")
+  users User[] @relation("favouriteArticles")
 
   @@index([title, authorId])
   @@map("articles")
 }
 
 model Folder {
-  id         Int       @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   name       String
-  decription String
-  author     User      @relation(fields: [authorId], references: [id])
+  description String
+  author     User   @relation(fields: [authorId], references: [id])
   authorId   Int
 
-  articles   Article[]
+  articles Article[]
 
-  users User[] @relation("favoriteFolders")
+  parent   Folder? @relation("folderToFolder", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId Int?
+
+  childrenFolders Folder[] @relation("folderToFolder")
+
+  users User[] @relation("favouriteFolders")
 
   @@index([name, authorId])
   @@map("folders")

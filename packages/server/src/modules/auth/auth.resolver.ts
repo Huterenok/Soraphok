@@ -7,12 +7,12 @@ import { LoginUser, RegisterUser } from "src/types/graphql";
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation("registerUser")
+  @Mutation()
   async register(@Args("input") input: RegisterUser) {
     return this.authService.register(input);
   }
 
-  @Mutation("loginUser")
+  @Mutation()
   async login(@Args("input") input: LoginUser) {
     return this.authService.login(input);
   }

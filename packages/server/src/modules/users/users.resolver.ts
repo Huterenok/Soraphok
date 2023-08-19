@@ -1,14 +1,16 @@
 import { Resolver, Query, Mutation, Args } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 
-import { JwtAuthGuard } from "src/modules/auth/guard/jwtAuthGuard";
 import { UsersService } from "./users.service";
-import { TOKEN } from "src/modules/auth/decorator/token";
-import { CreateUser, Token, UpdateUser } from "src/types/graphql";
-import { AlreadyTeacher, UserByUsernameNotFound, UserByIdNotFound, UserNotFound} from "./exception";
+import { UserByIdNotFound, UserByUsernameNotFound } from "./exception";
+
+import { AuthToken } from "src/modules/auth/decorator/authToken";
+import { JwtAuthGuard } from "src/modules/auth/guard/jwtAuthGuard";
+
+import { CreateUser, Token, UpdateUser, User} from "src/types/graphql";
 
 @Resolver("User")
-export class UsersResolvers {
+export class UsersResolver {
   constructor(private readonly userService: UsersService) {}
 
   async getUserByEmail(email: string) {
@@ -19,51 +21,44 @@ export class UsersResolvers {
     return this.userService.createUser(args);
   }
 
-	@Query("whoami")
-	@UseGuards(JwtAuthGuard)
-	async whoami(@TOKEN() token: Token) {
+  @Query()
+  @UseGuards(JwtAuthGuard)
+  async whoami(@AuthToken() token: Token) {
     return this.userService.getUserById(token.id);
   }
 
-  @Query("getAllUsers")
+  @Query()
   async getAllUsers(@Args("limit") limit: number = 30) {
     return this.userService.getAllUsers(limit);
   }
 
-  @Query("getUserById")
+  @Query()
   async getUserById(@Args("id") id: number) {
-    const user = this.userService.getUserById(id);
-    if (!user) {
+    const user = await this.userService.getUserById(id);
+		if (!user) {
       throw new UserByIdNotFound(id);
     }
-    return user;
+		return user;
   }
 
-  @Query("getUserByUsername")
+  @Query()
   async getUserByUsername(@Args("username") username: string) {
-    const user = this.userService.getUserByUsername(username);
-    if (!user) {
+    const user =  this.userService.getUserByUsername(username);
+		if (!user) {
       throw new UserByUsernameNotFound(username);
     }
-    return user;
+		return user;
   }
 
-  @Mutation("updateUser")
+  @Mutation()
   @UseGuards(JwtAuthGuard)
-  async updateUser(@TOKEN() token: Token, @Args("input") args: UpdateUser) {
-    console.log(token);
-    return this.userService.changeUser(token.id, args);
+  async updateUser(@AuthToken() token: Token, @Args("input") args: UpdateUser) {
+    return this.userService.updateUser(token.id, args);
   }
 
-  @Mutation("becomeTeacher")
+  @Mutation()
   @UseGuards(JwtAuthGuard)
-  async becomeTeacher(@TOKEN() token: Token) {
-    const user = await this.userService.getUserById(token.id);
-    if (!user) {
-      throw new UserNotFound();
-    } else if (user.isTeacher) {
-      throw new AlreadyTeacher();
-    }
-    return this.userService.becomeTeacher(user.id);
+  async becomeTeacher(@AuthToken() token: Token) {
+    return this.userService.becomeTeacher(token.id);
   }
 }

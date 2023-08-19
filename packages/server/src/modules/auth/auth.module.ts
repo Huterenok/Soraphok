@@ -3,6 +3,7 @@ import { JwtModule } from "@nestjs/jwt";
 
 import { AuthResolver } from "./auth.resolver";
 import { AuthService } from "./auth.service";
+
 import { UsersModule } from "src/modules/users/users.module";
 
 @Global()
@@ -16,7 +17,6 @@ import { UsersModule } from "src/modules/users/users.module";
       },
     }),
   ],
-  controllers: [],
   providers: [AuthResolver, AuthService],
   exports: [AuthService, JwtModule],
 })
