@@ -18,6 +18,6 @@ import { UsersModule } from "src/modules/users/users.module";
     }),
   ],
   providers: [AuthResolver, AuthService],
-  exports: [AuthService, JwtModule],
+	exports: [JwtModule]
 })
 export class AuthModule {}

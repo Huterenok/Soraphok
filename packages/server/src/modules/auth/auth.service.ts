@@ -2,13 +2,14 @@ import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcryptjs";
 
-//TODO
-import { UsersService } from "src/modules/users/users.service";
+//TODO: resolve import to entities
 import { User } from "@prisma/client";
 
-import { NotAuthorized } from "./exception";
+import { UsersService } from "../users/users.service";
 
-import { LoginUser, RegisterUser } from "src/types/graphql";
+import { WrongAuthCredentials } from "./exception";
+import { LoginUserDto, RegisterUserDto } from "./dto";
+
 import {
   AlreadyExistsWithEmail,
   AlreadyExistsWithUsername,
@@ -21,7 +22,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(dto: RegisterUser) {
+  async register(dto: RegisterUserDto) {
     const candidateByEmail = await this.usersService.getUserByEmail(dto.email);
     const candidateByUsername = await this.usersService.getUserByUsername(
       dto.username,
@@ -44,18 +45,18 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  async login(dto: LoginUser) {
+  async login(dto: LoginUserDto) {
     const user = await this.validateUser(dto);
     return this.generateToken(user);
   }
 
-  private async validateUser(dto: RegisterUser | LoginUser) {
+  private async validateUser(dto: RegisterUserDto | LoginUserDto) {
     const user = await this.usersService.getUserByEmail(dto.email);
 
     if (user && (await bcrypt.compare(dto.password, user.password))) {
       return user;
     } else {
-      throw new NotAuthorized();
+      throw new WrongAuthCredentials();
     }
   }
 

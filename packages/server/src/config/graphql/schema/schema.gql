@@ -1,0 +1,146 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthPayloadDto {
+  token: String!
+}
+
+type Article {
+  id: Int!
+  title: String!
+  content: String!
+  authorId: Int!
+  folderId: Int!
+  likes: Int!
+}
+
+type Folder {
+  id: Int!
+  name: String!
+  description: String!
+  authorId: Int!
+  folderId: Int
+  likes: Int!
+}
+
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  email: String!
+  bio: String
+  avatar: String
+  role: String!
+  isTeacher: Boolean!
+  isBanned: Boolean!
+  banReason: String
+}
+
+type UserResponseDto {
+  id: Int!
+  username: String!
+  bio: String
+  avatar: String
+  role: String!
+  isTeacher: Boolean!
+  isBanned: Boolean!
+  banReason: String
+}
+
+type Query {
+  whoami: User
+  getAllUsers(limit: Int): [UserResponseDto!]!
+  getUserById(id: Int!): UserResponseDto
+  getUserByUsername(username: String!): UserResponseDto
+  getAllArticles(limit: Int): [Article!]!
+  getArticleById(id: Int!): Article
+  getArticlesByTitle(title: String!): [Article!]
+  getFavouriteArticles: [Article!]
+  getMyArticles: [Article!]
+  getAllFolders(limit: Int): [Folder!]!
+  getFolderById(id: Int!): Folder
+  getFoldersByName(name: String!): [Folder!]
+  getChildrenFolders(id: Int!): [Folder!]
+  getChildrenArticles(id: Int!): [Article!]
+  getFavouriteFolders: [Folder!]
+  getMyFolders: [Folder!]
+}
+
+type Mutation {
+  register(input: RegisterUserDto!): AuthPayloadDto
+  login(input: LoginUserDto!): AuthPayloadDto
+  updateUser(input: UpdateUserDto): UserResponseDto!
+  becomeTeacher: UserResponseDto!
+  uploadFile(image: Upload!): Int!
+  toggleFavouriteArticle(id: Int!): Boolean!
+  createArticle(input: CreateArticleDto!): Article!
+  updateArticle(input: UpdateArticleDto!): Article
+  moveArticle(input: MoveArticleDto!): Article
+  deleteArticle(input: DeleteArticleDto!): Article
+  createFolder(input: CreateFolderDto!): Folder!
+  toggleFavouriteFolder(id: Int!): Boolean!
+  updateFolder(input: UpdateFolderDto!): Folder
+  moveFolder(input: MoveFolderDto!): Folder
+  deleteFolder(input: DeleteFolderDto!): Folder
+}
+
+input RegisterUserDto {
+  email: String!
+  password: String!
+  username: String!
+}
+
+input LoginUserDto {
+  email: String!
+  password: String!
+}
+
+input UpdateUserDto {
+  bio: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input CreateArticleDto {
+  title: String!
+  content: String!
+  folderId: Int!
+}
+
+input UpdateArticleDto {
+  id: Int!
+  title: String
+  content: String
+}
+
+input MoveArticleDto {
+  id: Int!
+  folderId: Int!
+}
+
+input DeleteArticleDto {
+  id: Int!
+}
+
+input CreateFolderDto {
+  folderId: Int
+  name: String!
+  description: String!
+}
+
+input UpdateFolderDto {
+  id: Int!
+  name: String
+  description: String
+}
+
+input MoveFolderDto {
+  id: Int!
+  folderId: Int!
+}
+
+input DeleteFolderDto {
+  id: Int!
+}

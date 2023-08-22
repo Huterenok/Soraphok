@@ -1,4 +1,4 @@
-export { UserByIdNotFound, UserByUsernameNotFound } from "./notFound";
+export { UserByIdNotFound, UserByUsernameNotFound, UserNotFound } from "./notFound";
 export { AlreadyTeacher } from "./teacher";
 export {
   AlreadyExistsWithEmail,

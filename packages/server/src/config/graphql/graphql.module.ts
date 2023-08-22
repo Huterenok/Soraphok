@@ -10,14 +10,19 @@ import { join } from "path";
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      typePaths: ["./**/*.graphql"],
-      definitions: {
-        path: join(process.cwd(), "src/types/graphql.ts"),
+      autoSchemaFile: join(
+        process.cwd(),
+        "src/config/graphql/schema/schema.gql",
+      ),
+      buildSchemaOptions: {
+        numberScalarMode: "integer",
       },
+			//TODO: FIX
+			csrfPrevention: false,
       formatError: (error: GraphQLError) => {
         const graphQLFormattedError: GraphQLFormattedError = {
           message:
-            //TODO
+            //TODO: type this
             //@ts-ignore
             error.extensions.exception?.response?.message || error.message,
         };

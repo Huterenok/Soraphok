@@ -2,24 +2,25 @@ import { Injectable } from "@nestjs/common";
 
 import { DatabaseService } from "src/config/database/database.service";
 
+import { Article, Folder } from "src/entities";
+
 import {
-  Article,
-  CreateArticle,
-  CreateFolder,
-  DeleteArticle,
-  DeleteFolder,
-  MoveArticle,
-  MoveFolder,
-  UpdateArticle,
-  UpdateFolder,
-} from "src/types/graphql";
+  CreateArticleDto,
+  CreateFolderDto,
+  DeleteArticleDto,
+  DeleteFolderDto,
+  MoveArticleDto,
+  MoveFolderDto,
+  UpdateArticleDto,
+  UpdateFolderDto,
+} from "./dto";
 
 @Injectable()
 export class ArticlesService {
   constructor(private readonly database: DatabaseService) {}
 
   //-------Articles---------
-  async createArticle(data: CreateArticle, userId: number) {
+  async createArticle(data: CreateArticleDto, userId: number) {
     const article = this.database.article.create({
       data: {
         ...data,
@@ -54,7 +55,7 @@ export class ArticlesService {
     const articles = await this.database.article.findMany({
       where: {
         users: {
-          every: {
+          some: {
             id: userId,
           },
         },
@@ -72,13 +73,40 @@ export class ArticlesService {
     return articles;
   }
 
-  //TODO
-  async updateArticle(data: UpdateArticle, articleExt: Article) {
+  async toggleFavouriteArticle(article: Article, id: number, userId: number) {
+    const favouriteArticle = await this.database.article.findFirst({
+      where: {
+        id,
+        users: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+    });
+    const action = favouriteArticle ? "disconnect" : "connect";
+		const changeLikeAmount = favouriteArticle ? article.likes - 1 : article.likes + 1;
+    await this.database.article.update({
+      where: {
+        id,
+      },
+      data: {
+        users: {
+          [action]: {
+            id: userId,
+          },
+        },
+				likes: changeLikeAmount
+      },
+    });
+    return !favouriteArticle;
+  }
+
+  async updateArticle(data: UpdateArticleDto, articleExt: Article) {
     const article = this.database.article.update({
       where: {
         id: data.id,
       },
-      //TODO
       data: {
         content: data.content || articleExt?.content,
         title: data.title || articleExt?.title,
@@ -87,12 +115,11 @@ export class ArticlesService {
     return article;
   }
 
-  async moveArticle(data: MoveArticle) {
+  async moveArticle(data: MoveArticleDto) {
     const article = this.database.article.update({
       where: {
         id: data.id,
       },
-      //TODO
       data: {
         folderId: data.folderId,
       },
@@ -100,7 +127,7 @@ export class ArticlesService {
     return article;
   }
 
-  async deleteArticle(data: DeleteArticle) {
+  async deleteArticle(data: DeleteArticleDto) {
     const article = this.database.article.delete({
       where: {
         id: data.id,
@@ -110,7 +137,7 @@ export class ArticlesService {
   }
 
   //-------Folders---------
-  async createFolder(data: CreateFolder, userId: number) {
+  async createFolder(data: CreateFolderDto, userId: number) {
     const article = this.database.folder.create({
       data: {
         ...data,
@@ -143,12 +170,12 @@ export class ArticlesService {
     return folders;
   }
 
-  //TODO
+
   async getFavouriteFolders(userId: number) {
     const folders = this.database.folder.findMany({
       where: {
         users: {
-          every: {
+          some: {
             id: userId,
           },
         },
@@ -169,7 +196,7 @@ export class ArticlesService {
   async getChildrenFolders(id: number) {
     const folders = this.database.folder.findMany({
       where: {
-        parentId: id,
+        folderId: id,
       },
     });
     return folders;
@@ -184,42 +211,64 @@ export class ArticlesService {
     return articles;
   }
 
-  async updateFolder(data: UpdateFolder) {
-    const folderById = await this.database.folder.findFirst({
+  async toggleFavouriteFolder(folder: Folder, id: number, userId: number) {
+    const favouriteFolder = await this.database.folder.findFirst({
       where: {
-        id: data.id,
+        id,
+        users: {
+          some: {
+            id: userId,
+          },
+        },
       },
     });
+    const action = favouriteFolder ? "disconnect" : "connect";
+		const changeLikeAmount = favouriteFolder ? folder.likes - 1 : folder.likes + 1;
+    await this.database.folder.update({
+      where: {
+        id,
+      },
+      data: {
+        users: {
+          [action]: {
+            id: userId,
+          },
+        },
+				likes: changeLikeAmount
+      },
+    });
+    return !favouriteFolder;
+  }
+
+  async updateFolder(data: UpdateFolderDto, folderById: Folder) {
     const folder = this.database.folder.update({
       where: {
         id: data.id,
       },
-      //TODO
       data: {
-        name: data.name || folderById?.name,
-        description: data.description || folderById?.description,
+        name: data.name || folderById.name,
+        description: data.description || folderById.description,
       },
     });
     return folder;
   }
 
-  async moveFolder(data: MoveFolder) {
+  async moveFolder(data: MoveFolderDto) {
     const folder = this.database.folder.update({
       where: {
         id: data.id,
       },
-      //TODO
       data: {
-        parentId: data.folderId,
+        folderId: data.folderId,
       },
     });
     return folder;
   }
 
-  async deleteFolder(data: DeleteFolder) {
+  async deleteFolder(data: DeleteFolderDto) {
     const folder = this.database.folder.delete({
       where: {
-        id: data.id
+        id: data.id,
       },
     });
     return folder;
