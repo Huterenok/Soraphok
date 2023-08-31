@@ -6,8 +6,11 @@ import {
   ProviderRedactor,
   type MilkdownRef,
   HeaderLesson,
+  setTopics,
 } from "entities/redactorLectures";
 import dynamic from "next/dynamic";
+import { useUnit } from "effector-react";
+import debounce from "lodash.debounce";
 
 const RedactorCourse = dynamic(
   () =>
@@ -21,10 +24,15 @@ const RedactorCourse = dynamic(
 
 export const RedactorWrapper = () => {
   const milkdownRef = useRef<MilkdownRef>(null);
+  const setTopicsUnit = useUnit(setTopics);
 
-  const onMilkdownChange = useCallback((markdown: string) => {
-    // console.log(markdown);
-  }, []);
+  const onMilkdownChange = useCallback(
+    debounce((markdown: string) => {
+      console.log(markdown);
+      setTopicsUnit(markdown);
+    }, 500),
+    [setTopicsUnit, debounce]
+  );
 
   return (
     <div className={redactorLessonWrapper}>

@@ -1,0 +1,37 @@
+.bubbleItem {
+  flex: 0 0 auto;
+  height: 25px;
+  padding: 0 5px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-light);
+
+  &:hover {
+    background-color: var(--color-primary-lighter);
+    color: var(--color-primary-lighter);
+  }
+
+  &[aria-pressed="true"] {
+    background-color: var(--color-primary-lighter);
+    border: 1px solid var(--color-primary-lightest);
+  }
+}
+
+.descriptionItem {
+  position: relative;
+  top: -10px;
+  border-radius: 10px;
+  background-color: var(--color-primary-darker);
+  padding: 5px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.descriptionKeybord {
+  font-size: 13px;
+}

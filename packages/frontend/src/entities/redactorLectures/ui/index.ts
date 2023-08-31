@@ -5,18 +5,16 @@ export {
   Diagram,
   LinkWidgetBefore,
   LinkWidgetAfter,
-  linkPlugin,
   ListItem,
   MathBlock,
-  tableTooltipCtx,
-  tableTooltip,
   TableTooltip,
-  tableSelectorPlugin,
+	TableSelectorWidget,
   Note,
   HeadingWidget,
   ImageMarkdown,
+  BubbleMenu,
 } from "./components";
-export { EmojiMenu, emojiClass } from "./emoji";
+export { EmojiMenuSlash, emojiClass } from "./emoji";
 export { Slash } from "./slash";
 
 export {

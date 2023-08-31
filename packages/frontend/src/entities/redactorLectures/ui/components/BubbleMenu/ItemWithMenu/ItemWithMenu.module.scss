@@ -1,0 +1,17 @@
+.contentModal {
+  position: relative;
+}
+
+.buttonTrigger {
+  height: 100%;
+  padding: 2px 7px;
+  background-color: var(--color-primary-light);
+  border: 1px solid var(--color-primary-lightest);
+  &[aria-expanded="true"] {
+    background-color: var(--color-primary-lighter);
+  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+}

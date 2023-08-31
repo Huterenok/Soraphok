@@ -4,6 +4,7 @@ import { Slice } from "@milkdown/prose/model";
 import { MilkdownRef } from "../../config";
 import { useRedactor } from "./useRedactor";
 
+
 export interface InitRedactorProps {
   onChange: (markdown: string) => void;
   milkdownRef: RefObject<MilkdownRef>;

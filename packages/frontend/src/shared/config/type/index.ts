@@ -1,1 +1,1 @@
-export type { SharedProps } from "./shared";
+export type { SharedProps, LinkI } from "./shared";

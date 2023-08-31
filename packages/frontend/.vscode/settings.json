@@ -1,5 +1,4 @@
 {
-  "workbench.startupEditor": "newUntitledFile",
   "workbench.colorCustomizations": {
     "editor.selectionBackground": "#02768d"
   },
@@ -11,21 +10,14 @@
   "editor.renderWhitespace": "boundary",
   "editor.lineHeight": 23,
   "explorer.confirmDelete": false,
-  "security.workspace.trust.enabled": false,
   "editor.insertSpaces": false,
   "editor.linkedEditing": true,
-  "ecsstractor_port.add_comment": false,
-  "ecsstractor_port.empty_line_before_nested_selector": false,
-  "liveServer.settings.donotVerifyTags": true,
-  "liveServer.settings.donotShowInfoMsg": true,
-  "html-css-class-completion.enableEmmetSupport": true,
   "emmet.triggerExpansionOnTab": true,
   "files.associations": {
     "*html": "html"
   },
   "explorer.confirmDragAndDrop": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "hardhat.telemetry": false,
   "eslint.validate": ["javascript"],
   "scss.validate": true,
   "css.validate": true,
@@ -35,9 +27,7 @@
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "git.enableSmartCommit": true,
-  "liveshare.alwaysFollowHost": true,
   "editor.formatOnSave": true,
-  // "reactSnippets.settings.prettierEnabled": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {

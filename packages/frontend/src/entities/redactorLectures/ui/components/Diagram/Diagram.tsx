@@ -1,4 +1,3 @@
-"use client";
 
 import { useNodeViewContext } from "@prosemirror-adapter/react";
 import * as Tabs from "@radix-ui/react-tabs";

@@ -33,11 +33,6 @@
   }
 
   & h1:first-child {
-    --h1-font-size: 3rem;
-    text-align: center;
-
-    margin-bottom: calc(var(--h1-vertical-rhythm-bottom) * var(--leading));
-
     & > span > a {
       display: none;
     }
@@ -64,6 +59,24 @@
     margin-top: calc(var(--heading-vertical-rhythm-top) * var(--leading));
   }
 
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6 {
+    border-bottom: 1px solid;
+    border-width: 35%;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(
+      to right,
+      var(--color-cyber-pink),
+      var(--background-surface-color),
+      var(--background-surface-color),
+      var(--background-surface-color)
+    );
+  }
+
   > pre,
   & > ul,
   & > p {
@@ -88,8 +101,21 @@
     margin-bottom: 8px;
     pointer-events: auto;
     width: 100%;
-    height: 2px;
-    background-color: var(--hr-background-color);
+    height: 3px;
+    background: linear-gradient(
+      to right,	
+      var(--background-surface-color) 30%,
+      var(--color-cyber-pink) 40%,
+      var(--background-surface-color) 30%
+    );
+
+    /* border-image-source: linear-gradient(
+      to right,
+      var(--color-cyber-pink),
+      var(--background-surface-color),
+      var(--background-surface-color),
+      var(--background-surface-color)
+    );  */
   }
 
   & p:has(> img:not(.ProseMirror-separator)) {
@@ -114,5 +140,9 @@
     border-left: 4px solid var(--color-primary-light);
     padding-left: 0.8em;
     margin: 1.6em 0;
+  }
+
+  .ProseMirror-selectednode {
+    outline: 2px solid var(--color-primary-lightest);
   }
 }

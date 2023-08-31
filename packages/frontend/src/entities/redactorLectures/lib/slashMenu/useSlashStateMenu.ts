@@ -1,4 +1,4 @@
-import { config, slash } from "../../config";
+import { slash } from "../../config";
 import { rootDOMCtx } from "@milkdown/core";
 import { Instance } from "@milkdown/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -33,29 +33,9 @@ export const useSlashStateMenu = (instance: Instance) => {
     [getEditor]
   );
 
-  const onKeydown = useCallback(
-    (e: KeyboardEvent) => {
-      const key = e.key;
-      if (key === "ArrowDown") {
-        setSelected((s) => (s + 1) % config.length);
-        return;
-      }
-      if (key === "ArrowUp") {
-        setSelected((s) => (s - 1 + config.length) % config.length);
-        return;
-      }
-      if (key === "Enter") {
-        getEditor()?.action(config[selectedRef.current].onSelect);
-        return;
-      }
-    },
-    [getEditor]
-  );
-
   return {
     root,
     setOpened,
-    onKeydown,
     setSelected,
     selected,
   };

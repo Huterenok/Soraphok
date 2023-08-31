@@ -1,1 +1,1 @@
-export { LinkWidgetBefore, LinkWidgetAfter, linkPlugin } from "./LinkWidget";
+export { LinkWidgetBefore, LinkWidgetAfter } from "./LinkWidget";

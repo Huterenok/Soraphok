@@ -1,0 +1,42 @@
+.menuUl {
+  margin: 0;
+  width: 350px;
+  height: 300px;
+  overflow-y: auto;
+  border-radius: 10px;
+  background: var(--color-primary-darker);
+
+  display: grid;
+  grid-template: 1fr / 120px 1fr;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.categories {
+  height: 100%;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-right: 1px solid var(--color-primary-light);
+}
+
+.categorieElement {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 3px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
+}
+
+.componentsWrapper {
+  width: 100%;
+  * li {
+    width: 100%;
+  }
+}
