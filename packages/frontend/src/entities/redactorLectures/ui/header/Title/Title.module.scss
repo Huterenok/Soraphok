@@ -1,0 +1,11 @@
+.title {
+  font-size: var(--h2-font-size);
+  height: 90px;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: var(--hover-overlay);
+  // border-radius: 0 0 10px 10px;
+  // margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}

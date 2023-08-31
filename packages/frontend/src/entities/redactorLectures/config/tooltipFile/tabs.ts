@@ -2,6 +2,7 @@ export enum tabVariants {
   UPLOAD = "UPLOAD",
   LINK = "LINK",
   UNPLASH = "UNPLASH",
+  EMOJI = "EMOJI",
 }
 
 export interface tabElement {
@@ -21,6 +22,10 @@ export const tabs: Record<tabVariants, tabElement> = {
   UNPLASH: {
     key: tabVariants.UNPLASH,
     title: "Unplash",
+  },
+  EMOJI: {
+    key: tabVariants.EMOJI,
+    title: "Emoji",
   },
 };
 

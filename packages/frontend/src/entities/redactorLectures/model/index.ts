@@ -1,2 +1,9 @@
 export { getMarkdownPlugin } from "./getRemoteMarkdown";
-export { $topicsLectures, addTopics } from "./topics";
+export {
+  $avatarStore,
+  changeAvatar,
+  $coverStore,
+  changeCover,
+  useSelectFile,
+} from "./header";
+export {$topics, setTopics} from './topics'

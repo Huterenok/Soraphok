@@ -1,5 +1,4 @@
 import { useNodeViewContext } from "@prosemirror-adapter/react";
-import { useMemo, type FC, useEffect } from "react";
 import {
   liContainer,
   liType,
@@ -8,26 +7,11 @@ import {
   liBullet,
 } from "./ListItem.module.scss";
 
-export const ListItem: FC = () => {
-  const {
-    contentRef,
-    node,
-    setAttrs,
-    view: { state },
-  } = useNodeViewContext();
+export const ListItem = () => {
+  const { contentRef, node, setAttrs } = useNodeViewContext();
   const { attrs } = node;
   const checked = attrs?.checked;
   const isBullet = attrs?.listType === "bullet";
-
-  // useEffect(() => {
-  //   const { selection, doc } = state;
-
-  //   const { from, to } = selection;
-  //   console.log(selection);
-  //   const text = doc.textBetween(from, to) || "";
-
-  //   console.log(text);
-  // }, [state]);
 
   return (
     <li className={liContainer}>

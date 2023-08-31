@@ -1,6 +1,1 @@
-export {
-  tableTooltipCtx,
-  tableTooltip,
-  TableTooltip,
-  tableSelectorPlugin,
-} from "./Table";
+export { TableTooltip, TableSelectorWidget } from "./Table";

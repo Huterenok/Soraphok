@@ -1,5 +1,5 @@
 import { emojiSlash } from "../../config";
-import { EmojiMenu } from "../../ui";
+import { EmojiMenuSlash } from "../../ui";
 import { Ctx } from "@milkdown/ctx";
 import { usePluginViewFactory } from "@prosemirror-adapter/react";
 
@@ -20,7 +20,7 @@ export const useEmojiMenu = () => {
           },
         },
         view: pluginViewFactory({
-          component: EmojiMenu,
+          component: EmojiMenuSlash,
         }),
         opened: false,
       });

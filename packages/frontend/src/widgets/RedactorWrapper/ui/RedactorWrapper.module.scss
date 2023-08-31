@@ -1,7 +1,25 @@
-
 .redactorLessonWrapper {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.containerRow {
+  display: flex;
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+  margin: 0 auto;
+  max-width: var(--container-width);
+  width: 100%;
+}
+
+.containerRedactor {
+  --col-width: 100%;
+  flex: 1 0;
+  margin-left: 0;
+  max-width: var(--col-width);
+  padding: 0 var(--spacing-horizontal);
+  width: 100%;
+  height: 100%;
 }

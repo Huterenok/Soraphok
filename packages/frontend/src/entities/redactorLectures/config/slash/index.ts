@@ -1,2 +1,1 @@
-
-export {slash, config} from './list'
+export { slash, config, CategoriesComponents } from "./list";

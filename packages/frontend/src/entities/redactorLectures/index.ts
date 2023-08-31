@@ -7,5 +7,6 @@ export {
 } from "./ui";
 
 export type { MilkdownRef } from "./config";
-export { $topicsLectures } from "./model";
 export { HeaderLesson } from "./ui";
+export { $topics, setTopics } from "./model";
+export {toggleUnderlineCommand} from './lib'

@@ -1,9 +1,4 @@
-import {
-  defaultValueCtx,
-  Editor,
-  editorViewOptionsCtx,
-  rootCtx,
-} from "@milkdown/core";
+import { Editor, editorViewOptionsCtx, rootCtx } from "@milkdown/core";
 import type { Ctx, MilkdownPlugin } from "@milkdown/ctx";
 import { block } from "@milkdown/plugin-block";
 import { clipboard } from "@milkdown/plugin-clipboard";
@@ -21,13 +16,7 @@ import {
   codeBlockSchema,
   commonmark,
   listItemSchema,
-  blockquoteSchema,
-  headingAttr,
-  paragraphAttr,
-  headingSchema,
-  wrapInHeadingInputRule,
   imageSchema,
-  blockquoteAttr,
 } from "@milkdown/preset-commonmark";
 import { gfm } from "@milkdown/preset-gfm";
 import { useEditor } from "@milkdown/react";
@@ -52,24 +41,33 @@ import {
   Block,
   CodeBlock,
   Diagram,
-  linkPlugin,
   ListItem,
   MathBlock,
-  tableTooltipCtx,
-  tableTooltip,
   TableTooltip,
-  tableSelectorPlugin,
   Note,
   emojiClass,
   ImageMarkdown,
 } from "../../ui";
+import {
+  remarkDirective,
+  tableTooltip,
+  tableTooltipCtx,
+  tableSelectorPlugin,
+  EmbeddedNode,
+  inputEmbeddedRule,
+  NoteNode,
+  inputNote,
+  linkPlugin,
+  inputVideoRule,
+  VideoNode,
+} from "../node";
 import { encode } from "shared/lib/crypto";
-import { addTopics, getMarkdownPlugin } from "../../model";
+import { getMarkdownPlugin } from "../../model";
 import { headingAnchorPlugin } from "../anchorPlugin";
-import { useUnit } from "effector-react";
-import { IframeNode, remarkDirectiveIframe, inputIframeRule } from "../Iframe";
-import { remarkDirectiveNote, NoteNode, inputNote } from "../note";
 import { usePlaceholderPlugin } from "../placeholder";
+import { tooltipBubble } from "../bubbleMenu";
+import { BubbleMenu } from "../../ui";
+import { underlineSchema, underlineKeymap, underlineAttr } from "../marks";
 
 export const useRedactor = (onChange: (markdown: string) => void) => {
   const pluginViewFactory = usePluginViewFactory();
@@ -156,26 +154,24 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
 
   const slash = useSlash();
   const emojiMenu = useEmojiMenu();
-  const addTopicsUnit = useUnit(addTopics);
-
   const editorInfo = useEditor(
     (root) => {
       return (
         Editor.make()
           .enableInspector()
           .config((ctx) => {
-            ctx.update(editorViewOptionsCtx, (prev) => ({
-              ...prev,
-              attributes: {
-                class: "mx-auto px-2 py-4 box-border",
-              },
-            }));
+            // ctx.update(editorViewOptionsCtx, (prev) => ({
+            //   ...prev,
+            //   attributes: {
+            //     class: "mx-auto px-2 py-4 box-border",
+            //   },
+            // }));
 
             ctx.set(rootCtx, root);
             ctx
               .get(listenerCtx)
               .markdownUpdated((_, markdown) => {
-                debounce(onChange, 100)(markdown);
+                debounce(onChange, 300)(markdown);
               })
               .updated((_, doc) => {
                 const state = doc.toJSON();
@@ -203,10 +199,22 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
           .use(upload)
           .use(trailing)
           .use(slash.plugins)
-          .use(headingAnchorPlugin(widgetViewFactory, addTopicsUnit))
-          .use([IframeNode, remarkDirectiveIframe, inputIframeRule])
-          .use([remarkDirectiveNote, NoteNode, inputNote])
+          .use(headingAnchorPlugin(widgetViewFactory))
+          .use([remarkDirective, EmbeddedNode, inputEmbeddedRule])
+          .use([remarkDirective, NoteNode, inputNote])
+          .use([remarkDirective, VideoNode, inputVideoRule])
+          // .use(underlineSchema)
+          // .use(underlineAttr)
+          // .use(underlineKeymap)
           .use($view(NoteNode, () => nodeViewFactory({ component: Note })))
+          .config((ctx) => {
+            ctx.set(tooltipBubble.key, {
+              view: pluginViewFactory({
+                component: BubbleMenu,
+              }),
+            });
+          })
+          .use(tooltipBubble)
           .use(
             $view(listItemSchema.node, () =>
               nodeViewFactory({ component: ListItem })
@@ -262,7 +270,6 @@ export const useRedactor = (onChange: (markdown: string) => void) => {
         }
 
         await editor.create();
-
       };
 
       effect().catch((e) => {

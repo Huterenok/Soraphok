@@ -16,7 +16,7 @@ export function Redactor() {
   return (
     <div className={bodyContent}>
       <div className={WrapperContent}>
-        {/* <NavbarLecturesCourse /> */}
+        <NavbarLecturesCourse />
         <main className={MainDoc}>
           <div className={containerRow}>
             <div className={containerRedactor}>

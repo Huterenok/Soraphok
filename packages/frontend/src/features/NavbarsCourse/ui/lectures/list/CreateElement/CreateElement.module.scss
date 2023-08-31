@@ -1,0 +1,30 @@
+.createElementWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-primary-darker);
+  gap: 20px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.createElementBtn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: var(--color-primary-lighter);
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
+}
+
+.tooltipDescription {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--color-primary-darker);
+}
