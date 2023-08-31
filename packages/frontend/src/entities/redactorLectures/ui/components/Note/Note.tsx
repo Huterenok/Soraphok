@@ -1,5 +1,4 @@
 import { useNodeViewContext } from "@prosemirror-adapter/react";
-import { ChangeEvent, useCallback, useState } from "react";
 
 import {
   blockquoteContainer,
@@ -43,9 +42,7 @@ export const Note = () => {
   // );
 
   return (
-    <div
-      className={clsx(blockquoteContainer, status[type as StatusNote])}
-    >
+    <div className={clsx(blockquoteContainer, status[type as StatusNote])}>
       <DropDown
         iconMenu={iconMenu}
         buttonSelectClass={selectTypeButton}

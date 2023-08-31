@@ -2,6 +2,7 @@ import { $command, $inputRule, $node } from "@milkdown/utils";
 import { Node } from "@milkdown/prose/model";
 import { InputRule } from "@milkdown/prose/inputrules";
 import { wrapIn } from "@milkdown/prose/commands";
+import { StatusNote } from "../../../config";
 
 export const NoteNode = $node("note", (ctx) => ({
   group: "block",
