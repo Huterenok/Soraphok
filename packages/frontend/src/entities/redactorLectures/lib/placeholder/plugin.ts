@@ -2,6 +2,7 @@ import { Plugin, PluginKey } from "@milkdown/prose/state";
 import type { EditorView } from "@milkdown/prose/view";
 import { $prose } from "@milkdown/utils";
 import { useMemo } from "react";
+
 const shouldRenderPlaceholder = (view: EditorView) => {
   const {
     editable,

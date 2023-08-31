@@ -1,15 +1,13 @@
 "use client";
 
 import { commandsCtx } from "@milkdown/core";
-import { TooltipProvider, tooltipFactory } from "@milkdown/plugin-tooltip";
+import { TooltipProvider } from "@milkdown/plugin-tooltip";
 import {
   addColAfterCommand,
   addColBeforeCommand,
   addRowAfterCommand,
   addRowBeforeCommand,
   deleteSelectedCellsCommand,
-  getCellsInCol,
-  getCellsInRow,
   moveColCommand,
   moveRowCommand,
   selectColCommand,
@@ -17,13 +15,8 @@ import {
   selectTableCommand,
   setAlignCommand,
 } from "@milkdown/preset-gfm";
-import { Plugin, PluginKey } from "@milkdown/prose/state";
 import { CellSelection } from "@milkdown/prose/tables";
-import type { Decoration } from "@milkdown/prose/view";
-import { DecorationSet } from "@milkdown/prose/view";
 import { useInstance } from "@milkdown/react";
-import { $ctx, $prose } from "@milkdown/utils";
-import type { useWidgetViewFactory } from "@prosemirror-adapter/react";
 import {
   usePluginViewContext,
   useWidgetViewContext,
@@ -45,13 +38,8 @@ import deleteIcon from "./tooltipButton/img/delete.svg";
 import alignLeft from "./tooltipButton/img/alignLeft.svg";
 import alignCenter from "./tooltipButton/img/alignCenter.svg";
 import alignRight from "./tooltipButton/img/alignRight.svg";
+import { tableTooltipCtx } from "../../../lib";
 
-export const tableTooltipCtx = $ctx<TooltipProvider | null, "tableTooltip">(
-  null,
-  "tableTooltip"
-);
-
-export const tableTooltip = tooltipFactory("TABLE");
 export const TableTooltip: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { view } = usePluginViewContext();
@@ -104,7 +92,7 @@ export const TableTooltip: FC = () => {
   }, [getEditor, loading, view]);
 
   return (
-    <div >
+    <div>
       <div ref={ref}>
         {!isWholeTable && !isHeading && isRow && (
           <TooltipButton
@@ -209,9 +197,7 @@ export const TableTooltip: FC = () => {
   );
 };
 
-// right-px h-2 left-0 -top-3.5 hover:bg-nord8 hover:dark:bg-nord9 absolute cursor-pointer bg-gray-200 dark:bg-gray-600
-
-const TableSelectorWidget: FC = () => {
+export const TableSelectorWidget: FC = () => {
   const { spec } = useWidgetViewContext();
   const type = spec?.type;
   const index = spec?.index ?? 0;
@@ -306,66 +292,3 @@ const TableSelectorWidget: FC = () => {
     />
   );
 };
-
-export const tableSelectorPlugin = (
-  widgetViewFactory: ReturnType<typeof useWidgetViewFactory>
-) =>
-  $prose(() => {
-    const key = new PluginKey("MILKDOWN_TABLE_SELECTOR");
-    return new Plugin({
-      key,
-      state: {
-        init() {
-          return {
-            decorations: DecorationSet.empty,
-            pos: 0,
-          };
-        },
-        apply(
-          tr,
-          value: { decorations: DecorationSet; pos: number },
-          oldState,
-          newState
-        ) {
-          const leftCells = getCellsInCol(0, tr.selection);
-          if (!leftCells) return { decorations: DecorationSet.empty, pos: 0 };
-          const topCells = getCellsInRow(0, tr.selection);
-          if (!topCells) return { decorations: DecorationSet.empty, pos: 0 };
-
-          const createWidget = widgetViewFactory({
-            as: "div",
-            component: TableSelectorWidget,
-          });
-
-          const [topLeft] = leftCells;
-          if (!topLeft) return { decorations: DecorationSet.empty, pos: 0 };
-
-          const decorations: Decoration[] = [];
-          decorations.push(createWidget(topLeft.pos + 1, { type: "top-left" }));
-          leftCells.forEach((cell, index) => {
-            decorations.push(
-              createWidget(cell.pos + 1, { type: "left", index })
-            );
-          });
-          topCells.forEach((cell, index) => {
-            decorations.push(
-              createWidget(cell.pos + 1, { type: "top", index })
-            );
-          });
-
-          if (value.pos === topLeft.pos && oldState.doc.eq(newState.doc))
-            return value;
-
-          return {
-            decorations: DecorationSet.create(tr.doc, decorations),
-            pos: topLeft.pos,
-          };
-        },
-      },
-      props: {
-        decorations(state) {
-          return key.getState(state).decorations;
-        },
-      },
-    });
-  });

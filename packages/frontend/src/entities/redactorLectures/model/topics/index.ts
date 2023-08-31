@@ -1,1 +1,2 @@
-export { $topicsLectures, addTopics } from "./topicsLectures";
+
+export {$topics, setTopics} from './state'

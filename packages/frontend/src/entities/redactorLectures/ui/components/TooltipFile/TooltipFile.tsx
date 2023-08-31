@@ -5,12 +5,13 @@ import {
   TabsList,
   TabsTrigger,
 } from "./TooltipFile.module.scss";
-import { tabProps, tabs } from "../../../config";
+import { tabs } from "../../../config";
 import { Link } from "./Link/Link";
 import { Upload } from "./Upload/Upload";
 import { Unplash } from "./Unplash/Unplash";
+import { Emoji } from "./Emoji/Emoji";
 
-export const TooltipFile = ({ changeValue }: tabProps) => {
+export const TooltipFile = () => {
   return (
     <Popover.Portal>
       <Popover.Content className={popoverContent} sideOffset={5}>
@@ -27,9 +28,10 @@ export const TooltipFile = ({ changeValue }: tabProps) => {
             ))}
           </Tabs.List>
 
-          <Upload changeValue={changeValue} />
-          <Link changeValue={changeValue} />
-          <Unplash changeValue={changeValue} />
+          <Upload />
+          <Link />
+          <Unplash />
+          <Emoji />
         </Tabs.Root>
       </Popover.Content>
     </Popover.Portal>

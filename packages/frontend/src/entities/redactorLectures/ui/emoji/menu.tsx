@@ -8,10 +8,11 @@ import { usePluginViewContext } from "@prosemirror-adapter/react";
 import { gemoji } from "gemoji";
 import { useEffect, useRef } from "react";
 import { menuEmoji } from "./menu.module.scss";
+import { EmojiMenuUi } from "shared/ui/EmojiMenu";
 
 const emojiSearchRegexp = /:(?<search>\S+)/;
 
-export const EmojiMenu = () => {
+export const EmojiMenuSlash = () => {
   const { view, prevState } = usePluginViewContext();
   const slashProvider = useRef<SlashProvider>();
   const ref = useRef<HTMLDivElement>(null);
@@ -77,7 +78,9 @@ export const EmojiMenu = () => {
 
   return (
     <div role="tooltip" ref={ref}>
-      {emojis.length > 0 && (
+      <EmojiMenuUi />
+
+      {/* {emojis.length > 0 && (
         <ul className={menuEmoji}>
           {emojis.map((item, i) => (
             <EmojiMenuItem
@@ -92,7 +95,7 @@ export const EmojiMenu = () => {
             </EmojiMenuItem>
           ))}
         </ul>
-      )}
+      )} */}
     </div>
   );
 };

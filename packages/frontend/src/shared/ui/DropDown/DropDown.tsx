@@ -1,9 +1,6 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import {
-  buttonTiger,
-  list,
-  listElement,
-} from "./DropDown.module.scss";
+import { buttonTiger, list, listElement } from "./DropDown.module.scss";
+import "./DropDown.scss";
 import menu from "./img/menu.svg";
 import { Button } from "shared/ui/Button";
 

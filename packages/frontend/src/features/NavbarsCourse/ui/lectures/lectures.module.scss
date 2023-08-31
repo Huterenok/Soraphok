@@ -28,6 +28,10 @@
   height: 100%;
   padding-top: var(--navbar-height);
   width: var(--doc-sidebar-width);
+
+  @media (max-width: 900px) {
+    width: 230px;
+  }
 }
 
 .menu_indedets {
@@ -36,9 +40,4 @@
   flex-grow: 1;
   font-weight: var(--font-weight-semibold);
   overflow-x: hidden;
-}
-
-.content_list {
-  margin: 0;
-  padding-left: 0;
 }
